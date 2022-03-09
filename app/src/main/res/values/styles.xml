@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextView">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="TextView.Bold">
+        <item name="android:fontFamily">@font/nunito_font_bold</item>
+    </style>
+
+    <style name="TextView.Medium">
+        <item name="android:fontFamily">@font/nunito_font_medium</item>
+    </style>
+
+    <style name="TextView.SplashScreen">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextView.SplashScreen.Description">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextView.MainActivity" />
+
+    <style name="TextView.MainActivity.ViewAll">
+        <item name="android:text">10sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="RoundCornerOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="EditText" />
+
+    <style name="EditText.Input">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textColorHint">@color/darkGrey</item>
+        <item name="android:textColor">@color/darkGrey</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+</resources>

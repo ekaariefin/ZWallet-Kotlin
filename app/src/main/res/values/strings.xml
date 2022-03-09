@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ZWallet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="text_reset_password">Reset Password</string>
+    <string name="text_login_desc">Login to your existing account to access all the features in Zwallet.</string>
+    <string name="text_register_desc">Create your account to access Zwallet.</string>
+    <string name="text_reset_password_desc">Enter your Zwallet e-mail so we can send you a password reset link.</string>
+    <string name="hint_email">Enter your email address</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="hint_password_register">Create your password</string>
+    <string name="text_forgot_password">Forgot password?</string>
+    <string name="slogans">Make easy your payment</string>
+</resources>

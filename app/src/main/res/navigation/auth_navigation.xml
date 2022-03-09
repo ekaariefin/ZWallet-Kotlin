@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/loginFragement">
+
+<!--    login fragment  -->
+    <fragment
+        android:id="@+id/loginFragement"
+        android:name="com.ariefin.zwallet.ui.auth.LoginFragement"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+                android:id="@+id/loginActionRegister"
+                app:destination="@id/registerFragment"/>
+        <action
+            android:id="@+id/loginActionReset"
+            app:destination="@id/resetPassword"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.ariefin.zwallet.ui.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/registerActionLogin"
+            app:destination="@id/loginFragement"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/resetPassword"
+        android:name="com.ariefin.zwallet.ui.auth.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password">
+        <action
+            android:id="@+id/resetActionForm"
+            app:destination="@id/resetPasswordForm"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/resetPasswordForm"
+        android:name="com.ariefin.zwallet.ui.auth.ResetPasswordFormFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password">
+    </fragment>
+
+
+
+
+</navigation>
