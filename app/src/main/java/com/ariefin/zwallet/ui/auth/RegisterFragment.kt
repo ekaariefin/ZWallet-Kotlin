@@ -81,17 +81,13 @@ class RegisterFragment : Fragment() {
 
 
         }
-
-//        binding.btnLoginRegister.setOnClickListener {
-//            Handler().postDelayed({
-//                val intent = Intent(activity, MainActivity::class.java)
-//                startActivity(intent)
-//            }, 2000)
-//        }
-
         binding.signInText.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.registerActionLogin)
         }
+
+
+
+
     }
 
 

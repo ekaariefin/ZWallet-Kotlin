@@ -1,12 +1,12 @@
 package com.ariefin.zwallet.data.api
 
-import com.ariefin.zwallet.model.APIResponse
-import com.ariefin.zwallet.model.Register
-import com.ariefin.zwallet.model.User
+import com.ariefin.zwallet.model.*
+import com.ariefin.zwallet.model.request.HomeRequest
 import com.ariefin.zwallet.model.request.LoginRequest
 import com.ariefin.zwallet.model.request.RegisterRequest
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ZWalletApi {
@@ -15,5 +15,11 @@ interface ZWalletApi {
 
     @POST("auth/signup")
     fun register(@Body request: RegisterRequest): Call<APIResponse<User>>
+
+    @GET("user/myProfile")
+    fun getProfile():Call<APIResponse<UserDetail>>
+
+    @GET("home/getBalance")
+    fun getBalance():Call<APIResponse<ArrayList<Balance>>>
 
 }
