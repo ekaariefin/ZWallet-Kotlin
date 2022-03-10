@@ -5,7 +5,6 @@
     android:id="@+id/auth_navigation"
     app:startDestination="@id/loginFragement">
 
-<!--    login fragment  -->
     <fragment
         android:id="@+id/loginFragement"
         android:name="com.ariefin.zwallet.ui.auth.LoginFragement"
@@ -17,7 +16,6 @@
         <action
             android:id="@+id/loginActionReset"
             app:destination="@id/resetPassword"/>
-
     </fragment>
 
     <fragment
