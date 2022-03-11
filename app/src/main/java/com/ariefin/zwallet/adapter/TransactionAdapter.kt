@@ -8,9 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.data.Transaction
+import com.ariefin.zwallet.model.Invoice
+import com.ariefin.zwallet.utils.BASE_URL
+import com.ariefin.zwallet.utils.Helper.formatPrice
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 
-class TransactionAdapter(private var data: List<Transaction>): RecyclerView.Adapter<TransactionAdapter.TransactionAdapterHolder>() {
+class TransactionAdapter(private var data: List<Invoice>): RecyclerView.Adapter<TransactionAdapter.TransactionAdapterHolder>() {
     lateinit var contextAdapter: Context
 
     class TransactionAdapterHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -19,11 +24,17 @@ class TransactionAdapter(private var data: List<Transaction>): RecyclerView.Adap
         private val type: TextView = view.findViewById(R.id.textTransactionType)
         private val amount: TextView = view.findViewById(R.id.textTransactionAmount)
 
-        fun bindData(data: Transaction, context: Context, position: Int){
-            name.text = data.transactionName
-            type.text = data.transactionType
-            amount.text = data.transactionNominal.toString()
-            image.setImageDrawable(data.transactionImage)
+        fun bindData(data: Invoice, context: Context, position: Int){
+            name.text = data.name
+            type.text = data.type?.uppercase()
+            amount.formatPrice(data.amount.toString())
+            Glide.with(image)
+                .load(BASE_URL + data.image)
+                .apply(
+                    RequestOptions.circleCropTransform()
+                        .placeholder(R.drawable.ic_baseline_remove_red_eye_24)
+                )
+                .into(image)
         }
     }
 
@@ -41,5 +52,9 @@ class TransactionAdapter(private var data: List<Transaction>): RecyclerView.Adap
 
     override fun getItemCount(): Int {
         return this.data.size
+    }
+
+    fun addData(data: List<Invoice>) {
+        this.data = data
     }
 }

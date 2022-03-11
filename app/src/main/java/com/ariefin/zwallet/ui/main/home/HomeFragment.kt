@@ -26,12 +26,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.ariefin.zwallet.model.UserDetail
+import com.ariefin.zwallet.ui.viewModelsFactory
+import com.ariefin.zwallet.utils.Helper.formatPrice
+import javax.net.ssl.HttpsURLConnection
 
 class HomeFragment : Fragment() {
     private val transactionData = mutableListOf<Transaction>()
     private lateinit var transactionAdapter: TransactionAdapter
     private lateinit var binding: FragmentHomeBinding
     private lateinit var prefs: SharedPreferences
+    private val viewModel: HomeViewModel by viewModelsFactory { HomeViewModel(requireActivity().application) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,13 +50,8 @@ class HomeFragment : Fragment() {
 
         prefs = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
 
-        this.transactionAdapter = TransactionAdapter(transactionData)
-        val layoutManager = LinearLayoutManager(context)
-        binding.recyclerTransaction.layoutManager = layoutManager
-        binding.recyclerTransaction.adapter = transactionAdapter
         prepareData()
         getProfile()
-        getBalance()
 
 
         binding.profileImage.setOnClickListener {
@@ -96,73 +95,36 @@ class HomeFragment : Fragment() {
             })
     }
 
-    private fun getBalance() {
-        NetworkConfig(requireContext()).buildApi().getBalance()
-            .enqueue(object : Callback<APIResponse<ArrayList<Balance>>> {
-                override fun onResponse(
-                    call: Call<APIResponse<ArrayList<Balance>>>,
-                    response: Response<APIResponse<ArrayList<Balance>>>
-                ) {
-                    binding.currentBalance.text = response.body()?.data?.get(0)?.balance.toString()
-                    binding.userPhoneNum.text = response.body()?.data?.get(0)?.phone.toString()
-                }
-
-                override fun onFailure(call: Call<APIResponse<ArrayList<Balance>>>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            })
-    }
-
 
     private fun prepareData() {
-        this.transactionData.add(
-            Transaction(
-                transactionImage = activity?.getDrawable(R.drawable.avatar3)!!,
-                transactionName = "Githa Refina",
-                transactionNominal = 250000.00,
-                transactionType = "Cash In"
-            )
-        )
-        this.transactionData.add(
-            Transaction(
-                transactionImage = activity?.getDrawable(R.drawable.avatar2)!!,
-                transactionName = "Hatta Febriansyah",
-                transactionNominal = 20000.00,
-                transactionType = "Cash In"
-            )
-        )
-        this.transactionData.add(
-            Transaction(
-                transactionImage = activity?.getDrawable(R.drawable.avatar1)!!,
-                transactionName = "Yudhi Nur Bayu",
-                transactionNominal = 50000.00,
-                transactionType = "Cash In"
-            )
-        )
-        this.transactionData.add(
-            Transaction(
-                transactionImage = activity?.getDrawable(R.drawable.avatar4)!!,
-                transactionName = "Aftabudin Arsyad",
-                transactionNominal = 70000.00,
-                transactionType = "Cash In"
-            )
-        )
-        this.transactionData.add(
-            Transaction(
-                transactionImage = activity?.getDrawable(R.drawable.avatar5)!!,
-                transactionName = "Efrinaldi Al Zuhri",
-                transactionNominal = 90000.00,
-                transactionType = "Cash In"
-            )
-        )
-        this.transactionData.add(
-            Transaction(
-                transactionImage = activity?.getDrawable(R.drawable.avatar6)!!,
-                transactionName = "Klin Agusta",
-                transactionNominal = 1200000.00,
-                transactionType = "Cash In"
-            )
-        )
-        this.transactionAdapter.notifyDataSetChanged()
+       this.transactionAdapter = TransactionAdapter(listOf())
+        binding.recyclerTransaction.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = transactionAdapter
+        }
+
+        viewModel.getBalance().observe(viewLifecycleOwner) {
+            if(it.status == HttpsURLConnection.HTTP_OK) {
+                binding.apply {
+                    currentBalance.formatPrice(it.data?.get(0)?.balance.toString())
+                    userPhoneNum.text = it.data?.get(0)?.phone
+                }
+            } else {
+                Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        viewModel.getInvoice().observe(viewLifecycleOwner) {
+            if(it.status == HttpsURLConnection.HTTP_OK) {
+                this.transactionAdapter.apply {
+                    addData(it.data!!)
+                    notifyDataSetChanged()
+                }
+            } else {
+                Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
     }
 }

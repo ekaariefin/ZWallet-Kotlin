@@ -7,18 +7,17 @@ import com.google.gson.annotations.Expose
 
 data class UserDetail(
     @SerializedName("email")
-    @Expose
     val email: String?,
     @SerializedName("firstname")
-    @Expose
     val firstname: String?,
     @SerializedName("image")
-    @Expose
     val image: String?,
     @SerializedName("lastname")
-    @Expose
     val lastname: String?,
+    @SerializedName("balance")
+    val balance: Double?,
+    @SerializedName("name")
+    val name: String?,
     @SerializedName("phone")
-    @Expose
     val phone: String?
 )

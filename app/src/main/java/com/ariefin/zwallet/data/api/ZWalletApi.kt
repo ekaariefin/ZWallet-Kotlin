@@ -21,7 +21,10 @@ interface ZWalletApi {
     fun getProfile():Call<APIResponse<UserDetail>>
 
     @GET("home/getBalance")
-    fun getBalance():Call<APIResponse<ArrayList<Balance>>>
+    suspend fun getBalance(): APIResponse<List<UserDetail>>
+
+    @GET("home/getInvoice")
+    suspend fun getInvoice(): APIResponse<List<Invoice>>
 
     @POST("auth/refresh-token")
     fun refreshToken(@Body request: RefreshTokenRequest): Call<APIResponse<User>>
