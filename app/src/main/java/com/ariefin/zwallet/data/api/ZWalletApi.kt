@@ -12,7 +12,7 @@ import retrofit2.http.POST
 
 interface ZWalletApi {
     @POST("auth/login")
-    fun login(@Body request: LoginRequest): Call<APIResponse<User>>
+    suspend fun login(@Body request: LoginRequest): APIResponse<User>
 
     @POST("auth/signup")
     fun register(@Body request: RegisterRequest): Call<APIResponse<User>>

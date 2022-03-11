@@ -52,7 +52,7 @@ class RegisterFragment : Fragment() {
                 binding.inputEmailRegister.text.toString(),
                 binding.inputPasswordRegister.text.toString()
             )
-            NetworkConfig(context).getService().register(registerRequest)
+            NetworkConfig(context).buildApi().register(registerRequest)
                 .enqueue(object : Callback<APIResponse<User>> {
                     override fun onResponse(
                         call: Call<APIResponse<User>>,

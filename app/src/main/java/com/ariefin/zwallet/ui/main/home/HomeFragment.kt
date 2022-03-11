@@ -80,7 +80,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun getProfile() {
-        NetworkConfig(requireContext()).getService().getProfile()
+        NetworkConfig(requireContext()).buildApi()
+            .getProfile()
             .enqueue(object : Callback<APIResponse<UserDetail>> {
                 override fun onResponse(
                     call: Call<APIResponse<UserDetail>>,
@@ -96,7 +97,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getBalance() {
-        NetworkConfig(requireContext()).getService().getBalance()
+        NetworkConfig(requireContext()).buildApi().getBalance()
             .enqueue(object : Callback<APIResponse<ArrayList<Balance>>> {
                 override fun onResponse(
                     call: Call<APIResponse<ArrayList<Balance>>>,

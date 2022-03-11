@@ -40,10 +40,10 @@ class RefreshTokenInterceptor(
             null
         else {
             with (prefs.edit()) {
-                putString(KEY_USER_TOKEN, response.data.token)
+                putString(KEY_USER_TOKEN, response.data?.token)
                 apply()
             }
-            response.data.token
+            response.data?.token
         }
     }
 

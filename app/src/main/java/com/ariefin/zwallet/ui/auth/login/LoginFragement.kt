@@ -6,47 +6,38 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
-import com.ariefin.zwallet.data.api.ZWalletApi
 import com.ariefin.zwallet.databinding.FragmentLoginBinding
-import com.ariefin.zwallet.model.APIResponse
-import com.ariefin.zwallet.model.User
-import com.ariefin.zwallet.model.request.LoginRequest
-import com.ariefin.zwallet.network.NetworkConfig
 import com.ariefin.zwallet.ui.main.MainActivity
+import com.ariefin.zwallet.ui.viewModelsFactory
 import com.ariefin.zwallet.utils.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.net.ssl.HttpsURLConnection
 
 class LoginFragement : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModelsFactory { LoginViewModel(requireActivity().application) }
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
+        preferences = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-
-        //fill lateinit viewModel
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[LoginViewModel::class.java]
 
         binding.inputPassword.addTextChangedListener {
             if (binding.inputPassword.text.length > 8) {
@@ -59,7 +50,7 @@ class LoginFragement : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-            if (binding.inputEmail.text.isNullOrEmpty() || binding.inputPassword.text.isNullOrEmpty()){
+            if (binding.inputEmail.text.isNullOrEmpty() || binding.inputPassword.text.isNullOrEmpty()) {
                 Toast.makeText(activity, "email or password is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -67,15 +58,28 @@ class LoginFragement : Fragment() {
                 binding.inputEmail.text.toString(),
                 binding.inputPassword.text.toString()
             )
-            if(response?.data == null){
-                Toast.makeText(context, "Authentication failed: Wrong email/password", Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                Handler().postDelayed({
-                    val intent = Intent(activity, MainActivity::class.java)
-                    startActivity(intent)
-                    activity?.finish()
-                }, 2000)
+
+            response.observe(viewLifecycleOwner) {
+                if (it.status == HttpsURLConnection.HTTP_OK) {
+                    val res = it.data
+
+                    with(preferences.edit()) {
+                        putBoolean(KEY_LOGGED_IN, true)
+                        putString(KEY_USER_EMAIL, it.data?.email)
+                        putString(KEY_USER_TOKEN, it.data?.token)
+                        putString(KEY_USER_REFRESH_TOKEN, it.data?.refreshToken)
+                        apply()
+                    }
+
+                    Handler().postDelayed({
+                        val intent = Intent(activity, MainActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }, 1000)
+                } else {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
 
