@@ -1,4 +1,4 @@
-package com.ariefin.zwallet.ui.home
+package com.ariefin.zwallet.ui.main.home
 
 import android.app.AlertDialog
 import android.content.Context
@@ -19,7 +19,6 @@ import com.ariefin.zwallet.data.Transaction
 import com.ariefin.zwallet.databinding.FragmentHomeBinding
 import com.ariefin.zwallet.model.APIResponse
 import com.ariefin.zwallet.model.Balance
-import com.ariefin.zwallet.model.User
 import com.ariefin.zwallet.network.NetworkConfig
 import com.ariefin.zwallet.utils.KEY_LOGGED_IN
 import com.ariefin.zwallet.utils.PREFS_NAME

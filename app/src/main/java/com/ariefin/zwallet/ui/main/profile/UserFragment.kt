@@ -1,4 +1,4 @@
-package com.ariefin.zwallet.ui.home
+package com.ariefin.zwallet.ui.main.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

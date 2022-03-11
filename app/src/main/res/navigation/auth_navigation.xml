@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragement"
-        android:name="com.ariefin.zwallet.ui.auth.LoginFragement"
+        android:name="com.ariefin.zwallet.ui.auth.login.LoginFragement"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.ariefin.zwallet.ui.auth.RegisterFragment"
+        android:name="com.ariefin.zwallet.ui.auth.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/resetPassword"
-        android:name="com.ariefin.zwallet.ui.auth.ResetPasswordFragment"
+        android:name="com.ariefin.zwallet.ui.auth.forgot.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password">
         <action
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/resetPasswordForm"
-        android:name="com.ariefin.zwallet.ui.auth.ResetPasswordFormFragment"
+        android:name="com.ariefin.zwallet.ui.auth.forgot.ResetPasswordFormFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password">
     </fragment>

@@ -1,4 +1,4 @@
-package com.ariefin.zwallet.ui.auth
+package com.ariefin.zwallet.ui.auth.login
 
 import android.content.Context
 import android.content.Intent
@@ -12,31 +12,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
+import com.ariefin.zwallet.data.api.ZWalletApi
 import com.ariefin.zwallet.databinding.FragmentLoginBinding
 import com.ariefin.zwallet.model.APIResponse
 import com.ariefin.zwallet.model.User
 import com.ariefin.zwallet.model.request.LoginRequest
 import com.ariefin.zwallet.network.NetworkConfig
-import com.ariefin.zwallet.ui.home.MainActivity
+import com.ariefin.zwallet.ui.main.MainActivity
 import com.ariefin.zwallet.utils.*
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.HTTP
 import javax.net.ssl.HttpsURLConnection
-import androidx.core.widget.addTextChangedListener
 
 class LoginFragement : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var prefs: SharedPreferences
+    private lateinit var viewModel: LoginViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -45,7 +45,8 @@ class LoginFragement : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
-        prefs = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
+        //fill lateinit viewModel
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[LoginViewModel::class.java]
 
         binding.inputPassword.addTextChangedListener {
             if (binding.inputPassword.text.length > 8) {
@@ -57,47 +58,25 @@ class LoginFragement : Fragment() {
             }
         }
 
-
         binding.btnLogin.setOnClickListener {
             if (binding.inputEmail.text.isNullOrEmpty() || binding.inputPassword.text.isNullOrEmpty()){
                 Toast.makeText(activity, "email or password is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val loginRequest = LoginRequest(
+            val response = viewModel.login(
                 binding.inputEmail.text.toString(),
                 binding.inputPassword.text.toString()
             )
-            NetworkConfig(context).getService().login(loginRequest)
-                .enqueue(object : Callback<APIResponse<User>> {
-                    override fun onResponse(
-                        call: Call<APIResponse<User>>,
-                        response: Response<APIResponse<User>>
-                    ) {
-                        if(response.body()?.status != HttpsURLConnection.HTTP_OK){
-                            Toast.makeText(context, "Authentication failed: Wrong email/password", Toast.LENGTH_SHORT).show()
-                        }
-                        else{
-                            val res = response.body()!!.data
-
-                            with (prefs.edit()){
-                                putBoolean(KEY_LOGGED_IN, true)
-                                putString(KEY_USER_EMAIL, res.email)
-                                putString(KEY_USER_TOKEN, res.token)
-                                putString(KEY_USER_REFRESH_TOKEN, res.refreshToken)
-                                apply()
-                            }
-                            Handler().postDelayed({
-                                val intent = Intent(activity, MainActivity::class.java)
-                                startActivity(intent)
-                                activity?.finish()
-                            }, 2000)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<APIResponse<User>>, t: Throwable) {
-                        Toast.makeText(context, t.localizedMessage, Toast.LENGTH_SHORT).show()
-                    }
-                })
+            if(response?.data == null){
+                Toast.makeText(context, "Authentication failed: Wrong email/password", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Handler().postDelayed({
+                    val intent = Intent(activity, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }, 2000)
+            }
         }
 
         binding.signUpText.setOnClickListener {

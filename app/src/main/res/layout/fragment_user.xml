@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.auth.RegisterFragment"
+    tools:context=".ui.auth.register.RegisterFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".ui.home.UserFragment"
+    tools:context=".ui.main.profile.UserFragment"
     >
 
     <LinearLayout
@@ -134,7 +134,7 @@
             android:background="@drawable/background_login_card"
             android:paddingHorizontal="20dp"
             android:gravity="center_vertical"
-            android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+            android:drawableRight="@drawable/toggle_on"
             android:fontFamily="@font/nunito_font_bold"
             android:text="Logout"
             android:textSize="20sp"/>

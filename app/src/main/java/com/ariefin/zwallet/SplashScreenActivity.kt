@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.ariefin.zwallet.ui.auth.AuthActivity
-import com.ariefin.zwallet.ui.home.MainActivity
+import com.ariefin.zwallet.ui.main.MainActivity
 import com.ariefin.zwallet.utils.KEY_LOGGED_IN
 import com.ariefin.zwallet.utils.PREFS_NAME
 

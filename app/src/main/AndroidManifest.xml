@@ -16,7 +16,7 @@
             android:name=".ui.auth.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"

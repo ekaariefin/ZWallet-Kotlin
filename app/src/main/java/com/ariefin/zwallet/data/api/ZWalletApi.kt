@@ -3,6 +3,7 @@ package com.ariefin.zwallet.data.api
 import com.ariefin.zwallet.model.*
 import com.ariefin.zwallet.model.request.HomeRequest
 import com.ariefin.zwallet.model.request.LoginRequest
+import com.ariefin.zwallet.model.request.RefreshTokenRequest
 import com.ariefin.zwallet.model.request.RegisterRequest
 import retrofit2.Call
 import retrofit2.http.Body
@@ -21,5 +22,8 @@ interface ZWalletApi {
 
     @GET("home/getBalance")
     fun getBalance():Call<APIResponse<ArrayList<Balance>>>
+
+    @POST("auth/refresh-token")
+    fun refreshToken(@Body request: RefreshTokenRequest): Call<APIResponse<User>>
 
 }

@@ -1,4 +1,4 @@
-package com.ariefin.zwallet.ui.auth
+package com.ariefin.zwallet.ui.auth.register
 
 import android.content.Context
 import android.content.Intent
@@ -12,14 +12,13 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.navigation.Navigation
-import com.ariefin.zwallet.ui.home.MainActivity
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentRegisterBinding
 import com.ariefin.zwallet.model.APIResponse
 import com.ariefin.zwallet.model.User
-import com.ariefin.zwallet.model.request.LoginRequest
 import com.ariefin.zwallet.model.request.RegisterRequest
 import com.ariefin.zwallet.network.NetworkConfig
+import com.ariefin.zwallet.ui.auth.AuthActivity
 import com.ariefin.zwallet.utils.*
 import retrofit2.Call
 import retrofit2.Callback
