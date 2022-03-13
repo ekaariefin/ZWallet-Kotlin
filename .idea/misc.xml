@@ -3,6 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/drawable/background_button_grey.xml" value="0.1" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/drawable/background_card_white.xml" value="0.1" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/drawable/background_login_button.xml" value="0.12" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/drawable/background_login_card.xml" value="0.1435" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/drawable/background_primary.xml" value="0.12" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/drawable/personal_info_card_bg.xml" value="0.1435" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/drawable/pin_input_background.xml" value="0.12" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/activity_main.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_change_password.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_change_pin.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_create_pin.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_create_pin_success.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_home.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_input_new_pin.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_input_otp.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_login.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_manage_phone_num.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_personal_info.xml" value="0.22" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_register.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_reset_password.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_top_up.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/Eka Ariefin/AndroidStudioProjects/z-wallet/app/src/main/res/layout/fragment_user.xml" value="0.1" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable-v23/toggle_off.xml" value="0.1" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable-v23/toggle_on.xml" value="0.1" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_button_grey.xml" value="0.1235" />

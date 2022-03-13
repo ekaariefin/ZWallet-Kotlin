@@ -26,6 +26,9 @@
         <action
             android:id="@+id/registerActionLogin"
             app:destination="@id/loginFragement"/>
+        <action
+            android:id="@+id/action_registerFragment_to_inputOtpFragment"
+            app:destination="@id/inputOtpFragment" />
     </fragment>
 
     <fragment
@@ -45,7 +48,12 @@
         tools:layout="@layout/fragment_reset_password">
     </fragment>
 
-
+    <fragment
+        android:id="@+id/inputOtpFragment"
+        android:name="com.ariefin.zwallet.InputOtpFragment"
+        android:label="InputOtpFragment"
+        tools:layout="@layout/fragment_input_otp">
+    </fragment>
 
 
 </navigation>

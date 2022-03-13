@@ -13,10 +13,68 @@
         <action
             android:id="@+id/action_homeFragment2_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_topUpFragment3"
+            app:destination="@id/topUpFragment3" />
     </fragment>
+
     <fragment
         android:id="@+id/userFragment"
         android:name="com.ariefin.zwallet.ui.main.profile.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_changePinFragment"
+            app:destination="@id/changePinFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/topUpFragment3"
+        android:name="com.ariefin.zwallet.ui.main.home.TopUpFragment"
+        android:label="TopUpFragment"
+        tools:layout="@layout/fragment_top_up" />
+
+
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.ariefin.zwallet.ui.main.profile.PersonalInfoFragment"
+        android:label="PersonalInfoFragment"
+        tools:layout="@layout/fragment_personal_info" >
+        <action
+            android:id="@+id/action_personalInfoFragment_to_managePhoneNumFragment"
+            app:destination="@id/managePhoneNumFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePinFragment"
+        android:name="com.ariefin.zwallet.ChangePinFragment"
+        android:label="ChangePinFragment"
+        tools:layout="@layout/fragment_change_pin" >
+        <action
+            android:id="@+id/action_changePinFragment_to_fragmentInputNewPin"
+            app:destination="@id/fragmentInputNewPin" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/managePhoneNumFragment"
+        android:name="com.ariefin.zwallet.ManagePhoneNumFragment"
+        android:label="ManagePhoneNumFragment"
+        tools:layout="@layout/fragment_manage_phone_num" />
+    <fragment
+        android:id="@+id/fragmentInputNewPin"
+        android:name="com.ariefin.zwallet.FragmentInputNewPin"
+        android:label="FragmentInputNewPin"
+        tools:layout="@layout/fragment_input_new_pin" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.ariefin.zwallet.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" />
+
 </navigation>

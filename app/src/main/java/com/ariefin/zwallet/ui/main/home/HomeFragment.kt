@@ -1,33 +1,28 @@
 package com.ariefin.zwallet.ui.main.home
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ariefin.zwallet.R
-import com.ariefin.zwallet.SplashScreenActivity
 import com.ariefin.zwallet.adapter.TransactionAdapter
 import com.ariefin.zwallet.data.Transaction
 import com.ariefin.zwallet.databinding.FragmentHomeBinding
 import com.ariefin.zwallet.model.APIResponse
-import com.ariefin.zwallet.model.Balance
+import com.ariefin.zwallet.model.UserDetail
 import com.ariefin.zwallet.network.NetworkConfig
-import com.ariefin.zwallet.utils.KEY_LOGGED_IN
+import com.ariefin.zwallet.ui.viewModelsFactory
+import com.ariefin.zwallet.utils.Helper.formatPrice
 import com.ariefin.zwallet.utils.PREFS_NAME
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.ariefin.zwallet.model.UserDetail
-import com.ariefin.zwallet.ui.viewModelsFactory
-import com.ariefin.zwallet.utils.Helper.formatPrice
 import javax.net.ssl.HttpsURLConnection
 
 class HomeFragment : Fragment() {
@@ -58,24 +53,10 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment2_to_userFragment)
         }
 
-        binding.notificationIcon.setOnClickListener {
-            AlertDialog.Builder(context)
-                .setTitle("Logout Confirmation")
-                .setMessage("Are you sure want to logout?")
-                .setPositiveButton("Yes") { _, _ ->
-                    with(prefs.edit()) {
-                        putBoolean(KEY_LOGGED_IN, false)
-                        apply()
-                    }
-                    val intent = Intent(activity, SplashScreenActivity::class.java)
-                    startActivity(intent)
-                    activity?.finish()
-                }
-                .setNegativeButton("Cancel") { _, _ ->
-                    return@setNegativeButton
-                }
-                .show()
+        binding.buttonTopUp.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment2_to_topUpFragment3)
         }
+
     }
 
     private fun getProfile() {

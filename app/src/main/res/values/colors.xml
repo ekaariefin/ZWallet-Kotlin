@@ -14,11 +14,18 @@
     <color name="greenColor">#1EC15F</color>
     <color name="redColor">#FF5B37</color>
     <color name="backgroundColor">#FAFCFF</color>
+    <color name="backgroundGreyColor">#E5E5E5</color>
     <color name="backgroundButtonColor">#EAEDFF</color>
+
     <color name="greyColor">#DFDCDC</color>
     <color name="darkGrey">#5b5b5b</color>
 
     <!-- Pallete Extension -->
     <color name="textGrey">#4D4B57</color>
+
+    <!-- Personal Info Color -->
+    <color name="personalInfoCardColor">#E5E8ED</color>
+
+    <color name="iconBackgroundGrey">#EBEEF2</color>
 
 </resources>

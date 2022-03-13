@@ -21,4 +21,5 @@ class HomeViewModel(app: Application): ViewModel() {
     fun getBalance(): LiveData<APIResponse<List<UserDetail>>> {
         return dataSource.getBalance()
     }
+
 }

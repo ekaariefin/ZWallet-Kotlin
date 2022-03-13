@@ -66,4 +66,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.4.1'
+
+    //otpview
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
+
+
+
+
 }
