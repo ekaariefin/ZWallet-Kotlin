@@ -2,41 +2,60 @@ package com.ariefin.zwallet.data
 
 import androidx.lifecycle.liveData
 import com.ariefin.zwallet.data.api.ZWalletApi
-import com.ariefin.zwallet.model.APIResponse
-import com.ariefin.zwallet.model.Invoice
-import com.ariefin.zwallet.model.User
-import com.ariefin.zwallet.model.UserDetail
 import com.ariefin.zwallet.model.request.LoginRequest
+import com.ariefin.zwallet.model.request.CreatePinRequest
+import com.ariefin.zwallet.utils.Resource
 import kotlinx.coroutines.Dispatchers
-import okhttp3.Dispatcher
 
 class ZWalletDataSource(private val apiClient: ZWalletApi) {
-    fun login(email: String, password: String) = liveData<APIResponse<User>>(Dispatchers.IO) {
+    fun login(email: String, password: String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
         try {
             val loginRequest = LoginRequest(email = email, password = password)
             val response = apiClient.login(loginRequest)
-            emit(response)
+            emit(Resource.success(response))
         } catch (e: Exception) {
-            emit(APIResponse(400,e.localizedMessage,null))
+            emit(Resource.error(null, e.localizedMessage))
         }
     }
 
-    fun getInvoice() = liveData<APIResponse<List<Invoice>>>(Dispatchers.IO) {
+    fun getInvoice() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
         try {
             val response = apiClient.getInvoice()
-            emit(response)
+            emit(Resource.success(response))
         } catch (e: Exception) {
-            emit(APIResponse(400,e.localizedMessage,null))
+            emit(Resource.error(null, e.localizedMessage))
         }
     }
 
-    fun getBalance() = liveData<APIResponse<List<UserDetail>>>(Dispatchers.IO) {
+    fun getBalance() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
         try {
             val response = apiClient.getBalance()
-            emit(response)
+            emit(Resource.success(response))
         } catch (e: Exception) {
-            emit(APIResponse(400,e.localizedMessage,null))
+            emit(Resource.error(null, e.localizedMessage))
         }
     }
 
+    fun getProfileInfo() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            val response = apiClient.getProfile()
+            emit(Resource.success(response))
+        } catch (e: Exception) {
+            emit(Resource.error(null, e.localizedMessage))
+        }
+    }
+
+    fun getContact() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            val response = apiClient.getContact()
+            emit(Resource.success(response))
+        } catch (e: Exception) {
+            emit(Resource.error(null, e.localizedMessage))
+        }
+    }
 }

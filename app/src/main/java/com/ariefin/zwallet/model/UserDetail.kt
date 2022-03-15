@@ -20,4 +20,5 @@ data class UserDetail(
     val name: String?,
     @SerializedName("phone")
     val phone: String?
+
 )

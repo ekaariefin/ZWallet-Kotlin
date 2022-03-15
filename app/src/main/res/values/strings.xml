@@ -25,7 +25,6 @@
     <string name="new_password">New Password</string>
     <string name="current_password">Current Password</string>
     <string name="change_password_desc">You must enter your current password and then type your new password twice.</string>
-    <string name="change_password">Change Password</string>
     <string name="back_button">Back Button</string>
     <string name="create_security_pin">Create Security PIN</string>
     <string name="create_security_pin_desc">Create a PIN that’s contain 6 digits number for security purpose in Zwallet.</string>

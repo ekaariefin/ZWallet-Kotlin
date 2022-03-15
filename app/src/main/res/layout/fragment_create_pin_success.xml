@@ -83,7 +83,7 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnConfirm"
+                android:id="@+id/btnConfirmToLogin"
                 style="@style/TextView.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

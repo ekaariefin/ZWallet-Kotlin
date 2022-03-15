@@ -5,26 +5,35 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.ariefin.zwallet.databinding.FragmentChangePinBinding
 import com.ariefin.zwallet.databinding.FragmentCreatePinBinding
-import com.ariefin.zwallet.ui.main.home.HomeViewModel
+import com.ariefin.zwallet.model.APIResponse
+import com.ariefin.zwallet.model.User
+import com.ariefin.zwallet.model.request.ChangePasswordRequest
+import com.ariefin.zwallet.model.request.CreatePinRequest
+import com.ariefin.zwallet.network.NetworkConfig
 import com.ariefin.zwallet.ui.viewModelsFactory
+import com.ariefin.zwallet.utils.*
+import com.ariefin.zwallet.widget.LoadingDialog
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import javax.net.ssl.HttpsURLConnection
 
 class CreatePinFragment : Fragment() {
     private lateinit var binding: FragmentCreatePinBinding
     private lateinit var prefs: SharedPreferences
     var pin  = mutableListOf<EditText>()
-    private val viewModel: HomeViewModel by viewModelsFactory { HomeViewModel(requireActivity().application) }
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -38,6 +47,33 @@ class CreatePinFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initEditText()
+
+        binding.btnConfirmCreatePin.setOnClickListener() {
+            val createpin = CreatePinRequest(
+                getpin().toString()
+            )
+
+            NetworkConfig(context).buildApi().createPIN(createpin)
+                .enqueue(object : Callback<APIResponse<User>> {
+                    override fun onResponse(
+                        call: Call<APIResponse<User>>,
+                        response: Response<APIResponse<User>>
+                    ) {
+                        if(response.body()?.status != HttpsURLConnection.HTTP_OK){
+                            Toast.makeText(context, "PIN Configuration Failed", Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+                            Toast.makeText(context, "Proses Konfigurasi PIN telah berhasil", Toast.LENGTH_SHORT).show()
+                            Navigation.findNavController(view).navigate(R.id.createPinSuccessFragment)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<APIResponse<User>>, t: Throwable) {
+                        Toast.makeText(context, "Gagal saat memproses perubahan password", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+        }
     }
 
     fun initEditText(){
@@ -89,7 +125,12 @@ class CreatePinFragment : Fragment() {
     }
 
     fun getpin():String{
-        return pin[0].text.toString()+pin[1].text.toString()+pin[2].text.toString()+pin[3].text.toString()+pin[4].text.toString()+pin[5].text.toString()
+        return pin[0].text.toString()+
+                pin[1].text.toString()+
+                pin[2].text.toString()+
+                pin[3].text.toString()+
+                pin[4].text.toString()+
+                pin[5].text.toString()
     }
 
 }

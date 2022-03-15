@@ -43,9 +43,9 @@ class ManagePhoneNumFragment : Fragment() {
     private fun prepareData() {
 
         viewModel.getBalance().observe(viewLifecycleOwner) {
-            if(it.status == HttpsURLConnection.HTTP_OK) {
+            if(it.resource?.status == HttpsURLConnection.HTTP_OK) {
                 binding.apply {
-                    phoneNumberValue.text = it.data?.get(0)?.phone
+                    phoneNumberValue.text = it.resource?.data?.get(0)?.phone
                 }
             } else {
                 Toast.makeText(context, "Terjadi Kesalahan Saat Memproses Data", Toast.LENGTH_SHORT)

@@ -19,12 +19,14 @@ import com.ariefin.zwallet.databinding.FragmentLoginBinding
 import com.ariefin.zwallet.ui.main.MainActivity
 import com.ariefin.zwallet.ui.viewModelsFactory
 import com.ariefin.zwallet.utils.*
+import com.ariefin.zwallet.widget.LoadingDialog
 import javax.net.ssl.HttpsURLConnection
 
 class LoginFragement : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModelsFactory { LoginViewModel(requireActivity().application) }
     private lateinit var preferences: SharedPreferences
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +34,7 @@ class LoginFragement : Fragment() {
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         preferences = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
+        loadingDialog = LoadingDialog(requireActivity())
         return binding.root
     }
 
@@ -60,26 +63,44 @@ class LoginFragement : Fragment() {
             )
 
             response.observe(viewLifecycleOwner) {
-                if (it.status == HttpsURLConnection.HTTP_OK) {
-                    val res = it.data
-
-                    with(preferences.edit()) {
-                        putBoolean(KEY_LOGGED_IN, true)
-                        putString(KEY_USER_EMAIL, it.data?.email)
-                        putString(KEY_USER_TOKEN, it.data?.token)
-                        putString(KEY_USER_REFRESH_TOKEN, it.data?.refreshToken)
-                        apply()
+                when (it.state) {
+                    State.LOADING -> {
+                        loadingDialog.start("Processing your request")
                     }
+                    State.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
+                            with(preferences.edit()) {
+                                putBoolean(KEY_LOGGED_IN, true)
+                                putString(KEY_USER_EMAIL, it.resource.data?.email)
+                                putString(KEY_USER_TOKEN, it.resource.data?.token)
+                                putString(KEY_USER_REFRESH_TOKEN, it.resource.data?.refreshToken)
+                                apply()
+                            }
 
-                    Handler().postDelayed({
-                        val intent = Intent(activity, MainActivity::class.java)
-                        startActivity(intent)
-                        activity?.finish()
-                    }, 1000)
-                } else {
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
-                        .show()
+                            if(it.resource.data?.hasPin!!) {
+                                Handler().postDelayed({
+                                    val intent = Intent(activity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    activity?.finish()
+                                }, 1000)
+                            }
+                            else {
+                                Navigation.findNavController(view)
+                                    .navigate(R.id.action_loginFragement_to_createPinFragment)
+                            }
+                        } else {
+                            Toast.makeText(context, it.resource?.message, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                    }
+                    State.ERROR -> {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
+
             }
         }
 

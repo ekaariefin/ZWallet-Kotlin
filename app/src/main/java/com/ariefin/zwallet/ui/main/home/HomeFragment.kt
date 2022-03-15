@@ -20,6 +20,8 @@ import com.ariefin.zwallet.network.NetworkConfig
 import com.ariefin.zwallet.ui.viewModelsFactory
 import com.ariefin.zwallet.utils.Helper.formatPrice
 import com.ariefin.zwallet.utils.PREFS_NAME
+import com.ariefin.zwallet.utils.State
+import com.ariefin.zwallet.widget.LoadingDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,7 +31,8 @@ class HomeFragment : Fragment() {
     private val transactionData = mutableListOf<Transaction>()
     private lateinit var transactionAdapter: TransactionAdapter
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var prefs: SharedPreferences
+    private lateinit var preferences: SharedPreferences
+    private lateinit var loadingDialog: LoadingDialog
     private val viewModel: HomeViewModel by viewModelsFactory { HomeViewModel(requireActivity().application) }
 
     override fun onCreateView(
@@ -37,17 +40,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        preferences = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
+        loadingDialog = LoadingDialog(requireActivity())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        prefs = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
-
         prepareData()
-        getProfile()
-
 
         binding.profileImage.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment2_to_userFragment)
@@ -57,55 +58,91 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment2_to_topUpFragment3)
         }
 
+        binding.buttonTransfer.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment2_to_findReceiverFragment)
+        }
+
     }
-
-    private fun getProfile() {
-        NetworkConfig(requireContext()).buildApi()
-            .getProfile()
-            .enqueue(object : Callback<APIResponse<UserDetail>> {
-                override fun onResponse(
-                    call: Call<APIResponse<UserDetail>>,
-                    response: Response<APIResponse<UserDetail>>
-                ) {
-                    binding.userNameInfo.text = response.body()?.data?.firstname.toString()
-                }
-
-                override fun onFailure(call: Call<APIResponse<UserDetail>>, t: Throwable) {
-                    Toast.makeText(requireContext(), "gagal", Toast.LENGTH_LONG).show()
-                }
-            })
-    }
-
 
     private fun prepareData() {
-       this.transactionAdapter = TransactionAdapter(listOf())
+        this.transactionAdapter = TransactionAdapter(listOf())
         binding.recyclerTransaction.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = transactionAdapter
         }
 
         viewModel.getBalance().observe(viewLifecycleOwner) {
-            if(it.status == HttpsURLConnection.HTTP_OK) {
-                binding.apply {
-                    currentBalance.formatPrice(it.data?.get(0)?.balance.toString())
-                    userPhoneNum.text = it.data?.get(0)?.phone
+            when (it.state) {
+                State.LOADING -> {
+                    loadingDialog.start("Processing your request")
+                    binding.apply {
+                        loadingIndicator.visibility = View.VISIBLE
+                        recyclerTransaction.visibility = View.GONE
+                    }
                 }
-            } else {
-                Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
 
-        viewModel.getInvoice().observe(viewLifecycleOwner) {
-            if(it.status == HttpsURLConnection.HTTP_OK) {
-                this.transactionAdapter.apply {
-                    addData(it.data!!)
-                    notifyDataSetChanged()
+                State.SUCCESS -> {
+
+                    if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
+                        binding.apply {
+                            currentBalance.formatPrice(it.resource.data?.get(0)?.balance.toString())
+                            userPhoneNum.text = it.resource.data?.get(0)?.phone
+                            userNameInfo.text = it.resource.data?.get(0)?.name
+                        }
+                    } else {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    loadingDialog.dismiss()
                 }
-            } else {
-                Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
-                    .show()
+
+                State.ERROR -> {
+                    binding.apply {
+                        loadingIndicator.visibility = View.GONE
+                        recyclerTransaction.visibility = View.VISIBLE
+                    }
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+
             }
+
+            viewModel.getInvoice().observe(viewLifecycleOwner) {
+                when (it.state) {
+                    State.LOADING -> {
+                        binding.apply {
+                            loadingIndicator.visibility = View.VISIBLE
+                            recyclerTransaction.visibility = View.GONE
+                        }
+                    }
+                    State.SUCCESS -> {
+                        binding.apply {
+                            loadingIndicator.visibility = View.GONE
+                            recyclerTransaction.visibility = View.VISIBLE
+                        }
+                        if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
+                            this.transactionAdapter.apply {
+                                addData(it.resource?.data!!)
+                                notifyDataSetChanged()
+                            }
+                        } else {
+                            Toast.makeText(context, it.resource?.message, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                    State.ERROR -> {
+                        binding.apply {
+                            loadingIndicator.visibility = View.GONE
+                            recyclerTransaction.visibility = View.VISIBLE
+                        }
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+
+
         }
     }
 }

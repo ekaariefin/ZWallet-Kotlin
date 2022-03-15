@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment2_to_topUpFragment3"
             app:destination="@id/topUpFragment3" />
+        <action
+            android:id="@+id/action_homeFragment2_to_findReceiverFragment"
+            app:destination="@id/findReceiverFragment" />
     </fragment>
 
     <fragment
@@ -76,5 +79,10 @@
         android:name="com.ariefin.zwallet.ChangePasswordFragment"
         android:label="ChangePasswordFragment"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/findReceiverFragment"
+        android:name="com.ariefin.zwallet.FindReceiverFragment"
+        android:label="FindReceiverFragment"
+        tools:layout="@layout/fragment_find_receiver" />
 
 </navigation>

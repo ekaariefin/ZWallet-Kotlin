@@ -1,0 +1,171 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="parent"
+    android:background="#FAFCFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/navigation_back"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_arrow_back_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change PIN"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_font_medium"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/transferUserInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingHorizontal="15dp"
+            android:orientation="horizontal"
+            android:background="@drawable/background_card_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/transferUserImage"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="15dp"
+                app:shapeAppearanceOverlay="@style/RoundCornerOverlay"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar2"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/transferUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Samuel Sushi"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/transferUserPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+62 812 345 678"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userCurrentBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/nunito"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="Rp120.000 Avaiable"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/input_pin_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/inputTransferAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="40sp"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:nextFocusForward="@+id/inputPin2"
+                android:background="@null"
+                android:hint="0.00"/>
+
+            <EditText
+                android:id="@+id/inputTransferDesc"
+                style="@style/EditText.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="45dp"
+                android:autofillHints="emailAddress"
+                android:drawableStart="@drawable/ic_baseline_edit_24"
+                android:hint="Add some notes"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputEmail" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_continue_to_new_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        android:background="@drawable/background_primary"
+        android:textAllCaps="false"
+        android:text="Continue"
+        android:textColor="@color/white"
+        android:layout_marginHorizontal="20dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="@font/nunito"
+        android:layout_marginVertical="30dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,9 @@
 package com.ariefin.zwallet.data.api
 
 import com.ariefin.zwallet.model.*
-import com.ariefin.zwallet.model.request.HomeRequest
-import com.ariefin.zwallet.model.request.LoginRequest
-import com.ariefin.zwallet.model.request.RefreshTokenRequest
-import com.ariefin.zwallet.model.request.RegisterRequest
+import com.ariefin.zwallet.model.request.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ZWalletApi {
     @POST("auth/login")
@@ -18,7 +13,7 @@ interface ZWalletApi {
     fun register(@Body request: RegisterRequest): Call<APIResponse<User>>
 
     @GET("user/myProfile")
-    fun getProfile():Call<APIResponse<UserDetail>>
+    suspend fun getProfile(): APIResponse<UserDetail>
 
     @GET("home/getBalance")
     suspend fun getBalance(): APIResponse<List<UserDetail>>
@@ -28,6 +23,16 @@ interface ZWalletApi {
 
     @POST("auth/refresh-token")
     fun refreshToken(@Body request: RefreshTokenRequest): Call<APIResponse<User>>
+
+    @PATCH("user/changePassword")
+    fun changePassword(@Body request: ChangePasswordRequest): Call<APIResponse<User>>
+
+    @PATCH("auth/PIN")
+    fun createPIN(@Body request: CreatePinRequest): Call<APIResponse<User>>
+
+    @GET("tranfer/contactUser")
+    suspend fun getContact(): APIResponse<List<Contact>>
+
 
 
 

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ariefin.zwallet.R
-import com.ariefin.zwallet.data.Transaction
 import com.ariefin.zwallet.model.Invoice
 import com.ariefin.zwallet.utils.BASE_URL
 import com.ariefin.zwallet.utils.Helper.formatPrice

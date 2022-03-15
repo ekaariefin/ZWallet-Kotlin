@@ -16,6 +16,9 @@
         <action
             android:id="@+id/loginActionReset"
             app:destination="@id/resetPassword"/>
+        <action
+            android:id="@+id/action_loginFragement_to_createPinFragment"
+            app:destination="@id/createPinFragment" />
     </fragment>
 
     <fragment
@@ -53,6 +56,24 @@
         android:name="com.ariefin.zwallet.InputOtpFragment"
         android:label="InputOtpFragment"
         tools:layout="@layout/fragment_input_otp">
+    </fragment>
+    <fragment
+        android:id="@+id/createPinFragment"
+        android:name="com.ariefin.zwallet.CreatePinFragment"
+        android:label="CreatePinFragment"
+        tools:layout="@layout/fragment_create_pin">
+        <action
+            android:id="@+id/action_createPinFragment_to_createPinSuccessFragment"
+            app:destination="@id/createPinSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPinSuccessFragment"
+        android:name="com.ariefin.zwallet.CreatePinSuccessFragment"
+        android:label="CreatePinSuccessFragment"
+        tools:layout="@layout/fragment_create_pin_success">
+        <action
+            android:id="@+id/action_createPinSuccessFragment_to_loginFragement"
+            app:destination="@id/loginFragement" />
     </fragment>
 
 
