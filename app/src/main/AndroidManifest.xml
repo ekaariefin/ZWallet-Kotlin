@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,13 +16,13 @@
         android:theme="@style/Theme.ZWallet"
         tools:targetApi="m">
         <activity
-            android:name=".ui.auth.AuthActivity"
+            android:name="com.ariefin.zwallet.ui.layout.auth.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.ariefin.zwallet.ui.layout.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.layout.SplashScreenActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

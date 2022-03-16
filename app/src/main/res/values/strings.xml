@@ -32,4 +32,7 @@
     <string name="pin_successfully_created">PIN Successfully Created</string>
     <string name="pin_success_desc">Your PIN was successfully created and you can now access all the features in Zwallet. Login to your new account and start exploring!</string>
     <string name="login_now">Login Now</string>
+    <string name="find_receiver">Find Receiver</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="details">Details</string>
 </resources>

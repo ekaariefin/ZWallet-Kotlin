@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragement"
-        android:name="com.ariefin.zwallet.ui.auth.login.LoginFragement"
+        android:name="com.ariefin.zwallet.ui.layout.auth.login.LoginFragement"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.ariefin.zwallet.ui.auth.register.RegisterFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
         <action
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/resetPassword"
-        android:name="com.ariefin.zwallet.ui.auth.forgot.ResetPasswordFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.forgot.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password">
         <action
@@ -46,20 +46,20 @@
 
     <fragment
         android:id="@+id/resetPasswordForm"
-        android:name="com.ariefin.zwallet.ui.auth.forgot.ResetPasswordFormFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.forgot.ResetPasswordFormFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password">
     </fragment>
 
     <fragment
         android:id="@+id/inputOtpFragment"
-        android:name="com.ariefin.zwallet.InputOtpFragment"
+        android:name="com.ariefin.zwallet.ui.layout.InputOtpFragment"
         android:label="InputOtpFragment"
         tools:layout="@layout/fragment_input_otp">
     </fragment>
     <fragment
         android:id="@+id/createPinFragment"
-        android:name="com.ariefin.zwallet.CreatePinFragment"
+        android:name="com.ariefin.zwallet.ui.layout.CreatePinFragment"
         android:label="CreatePinFragment"
         tools:layout="@layout/fragment_create_pin">
         <action
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/createPinSuccessFragment"
-        android:name="com.ariefin.zwallet.CreatePinSuccessFragment"
+        android:name="com.ariefin.zwallet.ui.layout.CreatePinSuccessFragment"
         android:label="CreatePinSuccessFragment"
         tools:layout="@layout/fragment_create_pin_success">
         <action

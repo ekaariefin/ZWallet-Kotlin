@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.ariefin.zwallet.ui.main.home.HomeFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.ariefin.zwallet.ui.main.profile.UserFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.profile.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" >
         <action
@@ -40,14 +40,14 @@
 
     <fragment
         android:id="@+id/topUpFragment3"
-        android:name="com.ariefin.zwallet.ui.main.home.TopUpFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.home.TopUpFragment"
         android:label="TopUpFragment"
         tools:layout="@layout/fragment_top_up" />
 
 
     <fragment
         android:id="@+id/personalInfoFragment"
-        android:name="com.ariefin.zwallet.ui.main.profile.PersonalInfoFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.profile.PersonalInfoFragment"
         android:label="PersonalInfoFragment"
         tools:layout="@layout/fragment_personal_info" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/changePinFragment"
-        android:name="com.ariefin.zwallet.ChangePinFragment"
+        android:name="com.ariefin.zwallet.ui.layout.ChangePinFragment"
         android:label="ChangePinFragment"
         tools:layout="@layout/fragment_change_pin" >
         <action
@@ -66,23 +66,31 @@
 
     <fragment
         android:id="@+id/managePhoneNumFragment"
-        android:name="com.ariefin.zwallet.ManagePhoneNumFragment"
+        android:name="com.ariefin.zwallet.ui.layout.ManagePhoneNumFragment"
         android:label="ManagePhoneNumFragment"
         tools:layout="@layout/fragment_manage_phone_num" />
     <fragment
         android:id="@+id/fragmentInputNewPin"
-        android:name="com.ariefin.zwallet.FragmentInputNewPin"
+        android:name="com.ariefin.zwallet.ui.layout.FragmentInputNewPin"
         android:label="FragmentInputNewPin"
         tools:layout="@layout/fragment_input_new_pin" />
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.ariefin.zwallet.ChangePasswordFragment"
+        android:name="com.ariefin.zwallet.ui.layout.ChangePasswordFragment"
         android:label="ChangePasswordFragment"
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/findReceiverFragment"
-        android:name="com.ariefin.zwallet.FindReceiverFragment"
+        android:name="com.ariefin.zwallet.ui.layout.FindReceiverFragment"
         android:label="FindReceiverFragment"
-        tools:layout="@layout/fragment_find_receiver" />
+        tools:layout="@layout/fragment_find_receiver" >
+        <action
+            android:id="@+id/action_findReceiverFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="com.ariefin.zwallet.ui.layout.TransferFragment"
+        tools:layout="@layout/fragment_transfer" />
 
 </navigation>

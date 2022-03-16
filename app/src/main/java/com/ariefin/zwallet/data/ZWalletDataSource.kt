@@ -3,11 +3,11 @@ package com.ariefin.zwallet.data
 import androidx.lifecycle.liveData
 import com.ariefin.zwallet.data.api.ZWalletApi
 import com.ariefin.zwallet.model.request.LoginRequest
-import com.ariefin.zwallet.model.request.CreatePinRequest
 import com.ariefin.zwallet.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class ZWalletDataSource(private val apiClient: ZWalletApi) {
+class ZWalletDataSource @Inject constructor(private val apiClient: ZWalletApi) {
     fun login(email: String, password: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {

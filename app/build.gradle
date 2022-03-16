@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -70,7 +72,12 @@ dependencies {
     //otpview
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
 
+    //lib
+    implementation 'com.google.dagger:hilt-android:2.41'
+    kapt 'com.google.dagger:hilt-compiler:2.41'
+}
 
 
-
+kapt {
+    correctErrorTypes true
 }
