@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/createPinFragment"
-        android:name="com.ariefin.zwallet.ui.layout.CreatePinFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.security.CreatePinFragment"
         android:label="CreatePinFragment"
         tools:layout="@layout/fragment_create_pin">
         <action
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/createPinSuccessFragment"
-        android:name="com.ariefin.zwallet.ui.layout.CreatePinSuccessFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.security.CreatePinSuccessFragment"
         android:label="CreatePinSuccessFragment"
         tools:layout="@layout/fragment_create_pin_success">
         <action

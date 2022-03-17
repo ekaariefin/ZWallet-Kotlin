@@ -1,4 +1,4 @@
-package com.ariefin.zwallet.ui.layout
+package com.ariefin.zwallet.ui.layout.auth.security
 
 import android.content.SharedPreferences
 import android.os.Bundle

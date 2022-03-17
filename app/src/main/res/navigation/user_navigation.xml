@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/changePinFragment"
-        android:name="com.ariefin.zwallet.ui.layout.ChangePinFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.security.ChangePinFragment"
         android:label="ChangePinFragment"
         tools:layout="@layout/fragment_change_pin" >
         <action
@@ -76,12 +76,12 @@
         tools:layout="@layout/fragment_input_new_pin" />
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.ariefin.zwallet.ui.layout.ChangePasswordFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.security.ChangePasswordFragment"
         android:label="ChangePasswordFragment"
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/findReceiverFragment"
-        android:name="com.ariefin.zwallet.ui.layout.FindReceiverFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.transfer.FindReceiverFragment"
         android:label="FindReceiverFragment"
         tools:layout="@layout/fragment_find_receiver" >
         <action
@@ -90,7 +90,25 @@
     </fragment>
     <fragment
         android:id="@+id/transferFragment"
-        android:name="com.ariefin.zwallet.ui.layout.TransferFragment"
-        tools:layout="@layout/fragment_transfer" />
+        android:name="com.ariefin.zwallet.ui.layout.main.transfer.TransferFragment"
+        tools:layout="@layout/fragment_transfer" >
+        <action
+            android:id="@+id/action_transferFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.transfer.ConfirmationFragment"
+        android:label="ConfirmationFragment"
+        tools:layout="@layout/fragment_confirmation">
+        <action
+            android:id="@+id/action_confirmationFragment_to_pinConfirmationFragment"
+            app:destination="@id/pinConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pinConfirmationFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.transfer.PinConfirmationFragment"
+        android:label="PinConfirmationFragment"
+        tools:layout="@layout/fragment_pin_confirmation"/>
 
 </navigation>

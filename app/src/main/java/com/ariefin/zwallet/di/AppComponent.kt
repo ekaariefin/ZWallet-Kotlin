@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppComponent {
     @Provides
-    @Singleton
     fun provideAPI(@ApplicationContext context: Context): ZWalletApi = NetworkConfig(context)
         .buildApi()
 

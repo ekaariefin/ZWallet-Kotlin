@@ -33,6 +33,9 @@ interface ZWalletApi {
     @GET("tranfer/contactUser")
     suspend fun getContact(): APIResponse<List<Contact>>
 
+    @POST("tranfer/newTranfer")
+    suspend fun transfer(@Body Transfer:TransferRequest,@Header("x-access-PIN") pin:String):APIResponseTransfer<TransferResponseModel>
+
 
 
 

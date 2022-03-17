@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.data.api.PostClickHandler
+import com.ariefin.zwallet.databinding.ItemContactTransferBinding
 import com.ariefin.zwallet.model.Contact
 import com.ariefin.zwallet.utils.BASE_URL
 import com.bumptech.glide.Glide
@@ -15,58 +16,44 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 
 class ContactAdapter(
-    private var values: List<Contact>,
-    private val clickHandler: PostClickHandler
-) : RecyclerView.Adapter<ContactAdapter.ContactAdapterHolder>() {
-    lateinit var contextAdapter: Context
+    private var data: List<Contact>,
+    private val clickListener: (Contact, View) -> Unit,
+): RecyclerView.Adapter<ContactAdapter.ContactAdapterHolder>() {
+    private lateinit var contextAdapter: Context
 
-    inner class ContactAdapterHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
-        val image: ShapeableImageView = view.findViewById(R.id.contactImage)
-        val name: TextView = view.findViewById(R.id.contactName)
-        val phone: TextView = view.findViewById(R.id.contactPhoneNum)
-
-        init {
-            view.setOnClickListener(this)
-        }
-
-        fun bindvalues(values: Contact, context: Context, position: Int){
-            name.text = values.name
-            phone.text = values.phone
-            Glide.with(image)
-                .load(BASE_URL + values.image)
+    class ContactAdapterHolder(private val binding: ItemContactTransferBinding): RecyclerView
+    .ViewHolder(binding.root) {
+        fun bindData(data: Contact, onClick: (Contact, View) -> Unit){
+            binding.contactName.text = data.name
+            binding.contactPhoneNum.text = data.phone
+            Glide.with(binding.contactImage)
+                .load(BASE_URL + data.image)
                 .apply(
                     RequestOptions.circleCropTransform()
                         .placeholder(R.drawable.ic_baseline_remove_red_eye_24)
                 )
-                .into(image)
-        }
+                .into(binding.contactImage)
 
-        override fun onClick(p0: View?) {
-            val currentPost = values[bindingAdapterPosition]
-            clickHandler.clickedPostItem(currentPost)
+            binding.root.setOnClickListener { onClick(data, binding.root) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapterHolder {
         val inflater = LayoutInflater.from(parent.context)
         this.contextAdapter = parent.context
-
-        val inflatedView: View = inflater.inflate(R.layout.contact_transaction, parent, false)
-        return ContactAdapterHolder(inflatedView)
+        val binding = ItemContactTransferBinding.inflate(inflater, parent, false)
+        return ContactAdapterHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ContactAdapterHolder, x: Int) {
-        holder.bindvalues(this.values[x], contextAdapter, x)
-
+        holder.bindData(this.data[x], clickListener)
     }
 
     override fun getItemCount(): Int {
-        return this.values.size
+        return this.data.size
     }
 
-    fun addData(values: List<Contact>) {
-        this.values = values
+    fun addData(data: List<Contact>) {
+        this.data = data
     }
-
-
 }

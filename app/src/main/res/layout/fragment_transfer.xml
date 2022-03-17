@@ -128,7 +128,6 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="40sp"
-                android:maxLength="1"
                 android:singleLine="true"
                 android:nextFocusForward="@+id/inputPin2"
                 android:background="@null"

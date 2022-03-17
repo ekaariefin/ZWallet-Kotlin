@@ -3,6 +3,7 @@ package com.ariefin.zwallet.data
 import androidx.lifecycle.liveData
 import com.ariefin.zwallet.data.api.ZWalletApi
 import com.ariefin.zwallet.model.request.LoginRequest
+import com.ariefin.zwallet.model.request.TransferRequest
 import com.ariefin.zwallet.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -56,6 +57,16 @@ class ZWalletDataSource @Inject constructor(private val apiClient: ZWalletApi) {
             emit(Resource.success(response))
         } catch (e: Exception) {
             emit(Resource.error(null, e.localizedMessage))
+        }
+    }
+
+    fun Transfer(transfer: TransferRequest, pin:String)= liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try {
+            val response =apiClient.transfer(transfer,pin)
+            emit(Resource.success(response))
+        }catch (e :Exception){
+            emit(Resource.error(null,e.localizedMessage))
         }
     }
 }
