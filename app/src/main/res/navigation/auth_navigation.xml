@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragement"
-        android:name="com.ariefin.zwallet.ui.layout.auth.login.LoginFragement"
+        android:name="com.ariefin.zwallet.ui.layout.auth.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/inputOtpFragment"
-        android:name="com.ariefin.zwallet.ui.layout.InputOtpFragment"
+        android:name="com.ariefin.zwallet.ui.layout.auth.register.InputOtpFragment"
         android:label="InputOtpFragment"
         tools:layout="@layout/fragment_input_otp">
     </fragment>

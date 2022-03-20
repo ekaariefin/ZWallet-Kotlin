@@ -2,7 +2,9 @@ package com.ariefin.zwallet.data
 
 import androidx.lifecycle.liveData
 import com.ariefin.zwallet.data.api.ZWalletApi
+import com.ariefin.zwallet.model.request.CreatePinRequest
 import com.ariefin.zwallet.model.request.LoginRequest
+import com.ariefin.zwallet.model.request.RegisterRequest
 import com.ariefin.zwallet.model.request.TransferRequest
 import com.ariefin.zwallet.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +69,37 @@ class ZWalletDataSource @Inject constructor(private val apiClient: ZWalletApi) {
             emit(Resource.success(response))
         }catch (e :Exception){
             emit(Resource.error(null,e.localizedMessage))
+        }
+    }
+
+    fun checkPIN(pin:String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            val response = apiClient.checkPIN(pin)
+            emit(Resource.success(response))
+        } catch (e: Exception) {
+            emit(Resource.error(null, e.localizedMessage))
+        }
+    }
+
+    fun createPIN(pin: CreatePinRequest) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            val response = apiClient.createPIN(pin)
+            emit(Resource.success(response))
+        } catch (e: Exception) {
+            emit(Resource.error(null, e.localizedMessage))
+        }
+    }
+
+    fun register(username: String, email: String, password: String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            val registerRequest = RegisterRequest(username = username, email = email, password = password)
+            val response = apiClient.register(registerRequest)
+            emit(Resource.success(response))
+        } catch (e: Exception) {
+            emit(Resource.error(null, e.localizedMessage))
         }
     }
 }

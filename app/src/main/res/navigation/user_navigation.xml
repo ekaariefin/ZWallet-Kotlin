@@ -66,14 +66,21 @@
 
     <fragment
         android:id="@+id/managePhoneNumFragment"
-        android:name="com.ariefin.zwallet.ui.layout.ManagePhoneNumFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.profile.ManagePhoneNumFragment"
         android:label="ManagePhoneNumFragment"
         tools:layout="@layout/fragment_manage_phone_num" />
     <fragment
         android:id="@+id/fragmentInputNewPin"
-        android:name="com.ariefin.zwallet.ui.layout.FragmentInputNewPin"
+        android:name="com.ariefin.zwallet.ui.layout.auth.security.FragmentInputNewPin"
         android:label="FragmentInputNewPin"
-        tools:layout="@layout/fragment_input_new_pin" />
+        tools:layout="@layout/fragment_input_new_pin" >
+        <action
+            android:id="@+id/action_fragmentInputNewPin_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_fragmentInputNewPin_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.ariefin.zwallet.ui.layout.auth.security.ChangePasswordFragment"
@@ -109,6 +116,34 @@
         android:id="@+id/pinConfirmationFragment"
         android:name="com.ariefin.zwallet.ui.layout.main.transfer.PinConfirmationFragment"
         android:label="PinConfirmationFragment"
-        tools:layout="@layout/fragment_pin_confirmation"/>
+        tools:layout="@layout/fragment_pin_confirmation">
+        <action
+            android:id="@+id/action_pinConfirmationFragment_to_transferSuccessFragment"
+            app:destination="@id/transferSuccessFragment" />
+        <action
+            android:id="@+id/action_pinConfirmationFragment_to_transferFailedFragment"
+            app:destination="@id/transferFailedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferSuccessFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.transfer.TransferSuccessFragment"
+        android:label="fragment_transfer_success"
+        tools:layout="@layout/fragment_transfer_success" >
+        <action
+            android:id="@+id/action_transferSuccessFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferFailedFragment"
+        android:name="com.ariefin.zwallet.ui.layout.main.transfer.TransferFailedFragment"
+        android:label="TransferFailedFragment"
+        tools:layout="@layout/fragment_transfer_failed" >
+        <action
+            android:id="@+id/action_transferFailedFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_transferFailedFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
 
 </navigation>

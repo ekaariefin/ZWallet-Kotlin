@@ -15,9 +15,11 @@ import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentTransferBinding
 import com.ariefin.zwallet.model.request.TransferRequest
 import com.ariefin.zwallet.utils.BASE_URL
+import com.ariefin.zwallet.utils.Helper.formatPrice
 import com.ariefin.zwallet.utils.PREFS_NAME
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import javax.net.ssl.HttpsURLConnection
 
 class TransferFragment : Fragment() {
     private lateinit var binding: FragmentTransferBinding
@@ -48,6 +50,14 @@ class TransferFragment : Fragment() {
                             .placeholder(R.drawable.ic_baseline_remove_red_eye_24)
                     )
                     .into(transferUserImage)
+            }
+        }
+
+        viewModel.getBalance().observe(viewLifecycleOwner) {
+            if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
+                binding.apply {
+                    userCurrentBalanceValue.formatPrice(it.resource.data?.get(0)?.balance.toString())
+                }
             }
         }
 

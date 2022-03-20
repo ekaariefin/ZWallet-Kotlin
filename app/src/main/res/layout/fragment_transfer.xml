@@ -7,7 +7,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintEnd_toStartOf="parent"
-    android:background="#FAFCFF">
+    android:background="@color/zBackgroundLightGrey">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,6 +98,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <TextView
+                android:id="@+id/userCurrentBalanceValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -105,7 +106,14 @@
                 android:fontFamily="@font/nunito"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:text="Rp120.000 Avaiable"/>
+                android:text=""/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text=" Avaiable"/>
         </LinearLayout>
 
 
@@ -127,11 +135,13 @@
                 android:inputType="number"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textSize="40sp"
+                android:textSize="48sp"
                 android:singleLine="true"
+                android:textColor="@color/primaryColor"
                 android:nextFocusForward="@+id/inputPin2"
                 android:background="@null"
-                android:hint="0.00"/>
+                android:hint="@string/_0_00"
+                android:autofillHints="0.00" />
 
             <EditText
                 android:id="@+id/inputTransferDesc"

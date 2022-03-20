@@ -17,9 +17,11 @@
         tools:targetApi="m">
         <activity
             android:name="com.ariefin.zwallet.ui.layout.auth.AuthActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name="com.ariefin.zwallet.ui.layout.main.MainActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".ui.layout.SplashScreenActivity"

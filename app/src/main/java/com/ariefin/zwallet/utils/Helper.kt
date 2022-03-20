@@ -4,6 +4,7 @@ import android.widget.TextView
 import java.text.DecimalFormat
 
 object Helper {
+
     fun TextView.formatPrice(value: String) {
         this.text = formatIDR(java.lang.Double.parseDouble(value))
     }

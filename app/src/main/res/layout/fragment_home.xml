@@ -1,199 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="none"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:background="@color/zBackgroundLightGrey">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/layoutUserInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/backgroundColor">
-
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profileImage"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="15dp"
+            app:shapeAppearanceOverlay="@style/RoundCornerOverlay"
+            android:scaleType="centerCrop"
+            android:src="@drawable/avatar2"/>
         <LinearLayout
-            android:id="@+id/userInfoGroup"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profileImage"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginEnd="15dp"
-                app:shapeAppearanceOverlay="@style/RoundCornerOverlay"
-                android:scaleType="centerCrop"
-                android:src="@drawable/avatar2"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hello, "
-                    android:textSize="12sp"
-                    android:textColor="@color/darkGrey"/>
-
-                <TextView
-                    android:id="@+id/userNameInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Eka Prasetyo Ariefin"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/notificationIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_bell"
-                android:layout_gravity="center"
-                android:contentDescription="Notification Icon" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/userBalanceGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_primary"
-            android:layout_margin="16dp"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="14dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userInfoGroup"
-            app:layout_constraintEnd_toEndOf="parent">
-
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/balanceTextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito"
-                android:textColor="@color/white"
-                android:layout_margin="5dp"
-                android:text="Balance"
-                android:textSize="14sp"/>
-
+                android:text="Hello, "
+                android:textSize="12sp"
+                android:textColor="@color/darkGrey"/>
             <TextView
-                android:id="@+id/currentBalance"
+                android:id="@+id/userNameInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito"
-                android:textColor="@color/white"
-                android:layout_margin="5dp"
-                android:text="Rp500.000"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:id="@+id/userPhoneNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:fontFamily="@font/nunito"
-                android:text="+62 813-9387-7946"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:text="Eka Prasetyo Ariefin"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/buttonGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userBalanceGroup"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttonTransfer"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:paddingHorizontal="30dp"
-                android:text="Transfer"
-                android:textAllCaps="false"
-                android:textColor="#514F5B"
-                android:drawableTint="#608DE2"
-                android:fontFamily="@font/nunito"
-                app:iconPadding="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/background_button_grey"
-                android:drawableStart="@drawable/ic_round_arrow_upward_24"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_marginLeft="10dp"
-                android:id="@+id/buttonTopUp"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:paddingHorizontal="30dp"
-                android:layout_height="wrap_content"
-                android:text="Top Up"
-                android:textAllCaps="false"
-                android:textColor="#514F5B"
-                android:drawableTint="#608DE2"
-                android:fontFamily="@font/nunito"
-                android:background="@drawable/background_button_grey"
-                android:drawableStart="@drawable/ic_baseline_add_24"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textTransactionHistory"
+        <ImageView
+            android:id="@+id/notificationIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Transaction History"
-            android:textSize="18sp"
+            android:src="@drawable/ic_bell"
+            android:layout_gravity="center"
+            android:contentDescription="@string/notification_icon" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutBalanceInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_primary"
+        android:layout_margin="16dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="14dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutUserInfo"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/balanceTextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text="@string/balance"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/currentBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=""
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/userPhoneNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/nunito"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutButtonGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="14dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutBalanceInfo"
+        app:layout_constraintEnd_toEndOf="parent">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonTransfer"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:paddingHorizontal="30dp"
+            android:text="Transfer"
+            android:textAllCaps="false"
             android:textColor="#514F5B"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonGroup" />
-
-        <TextView
-            android:id="@+id/textViewAll"
+            android:drawableTint="#608DE2"
+            android:fontFamily="@font/nunito_font"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:iconPadding="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/home_button_shape"
+            android:drawableStart="@drawable/ic_round_arrow_upward_24"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginLeft="10dp"
+            android:id="@+id/buttonTopUp"
             android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:paddingHorizontal="30dp"
             android:layout_height="wrap_content"
-            android:text="See all"
-            style="@style/TextView.MainActivity.ViewAll"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonGroup" />
+            android:text="Top Up"
+            android:textAllCaps="false"
+            android:textColor="#514F5B"
+            android:drawableTint="#608DE2"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:fontFamily="@font/nunito_font"
+            android:background="@drawable/home_button_shape"
+            android:drawableStart="@drawable/ic_baseline_add_24"/>
+    </LinearLayout>
 
+    <!-- transaction history  -->
+    <TextView
+        android:id="@+id/textTransactionHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/transaction_history"
+        android:textSize="18sp"
+        android:textColor="#514F5B"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutButtonGroup" />
+
+    <TextView
+        android:id="@+id/textViewAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/see_all"
+        style="@style/TextView.MainActivity.ViewAll"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutButtonGroup" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerTransaction"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintHeight_default="wrap"
+            tools:listitem="@layout/item_transaction_home"
             app:layout_constraintTop_toBottomOf="@id/textTransactionHistory"
-            tools:listitem="@layout/item_transaction_home" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <ProgressBar
-            android:id="@+id/loadingIndicator"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:indeterminateTint="@color/primaryColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-</ScrollView>
+    <ProgressBar
+        android:id="@+id/loadingIndicator"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminateTint="@color/primaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

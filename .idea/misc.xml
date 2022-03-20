@@ -30,13 +30,19 @@
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_button_grey.xml" value="0.1235" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_card_white.xml" value="0.122" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_image_item.xml" value="0.1" />
-        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_input.xml" value="0.1815" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_input.xml" value="0.1" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_item_transaction_home.xml" value="0.16" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_login_button.xml" value="0.1945" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_login_card.xml" value="0.11" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_primary.xml" value="0.1655" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/background_success.xml" value="0.1155" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/circle.xml" value="0.1" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/home_button_shape.xml" value="0.164" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.119" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.1" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/ic_launcher_background.xml" value="0.185" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/pin_input_background.xml" value="0.1185" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/pin_input_filled_background.xml" value="0.1185" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/toggle_off.xml" value="0.14" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/drawable/toggle_on.xml" value="0.14" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/font/nunito_font.xml" value="0.21666666666666667" />
@@ -52,12 +58,14 @@
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/contact_transaction.xml" value="0.45588235294117646" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_change_password.xml" value="0.22" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_change_pin.xml" value="0.30781010719754975" />
-        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_confirmation.xml" value="0.22" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_confirmation.xml" value="0.16" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_create_pin.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_create_pin_success.xml" value="0.18645833333333334" />
-        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_find_receiver.xml" value="0.22" />
-        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_find_receiver.xml" value="0.16" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_input_new_pin.xml" value="0.22" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_input_otp.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_login.xml" value="0.16" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_manage_phone_num.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_pin_confirmation.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_profile.xml" value="0.16" />
@@ -66,7 +74,10 @@
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_reset_password_form.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_top_up.xml" value="0.22" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_transfer.xml" value="0.2572614107883817" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_transfer_failed.xml" value="0.21" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_transfer_success.xml" value="0.15819750719079578" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/fragment_user.xml" value="0.12" />
+        <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/item_contact_transfer.xml" value="0.1" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/item_transaction_home.xml" value="0.5777777777777777" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/loading_dialog.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/eka_prasetyo/AndroidStudioProjects/ZWallet/app/src/main/res/layout/login.xml" value="0.351931330472103" />

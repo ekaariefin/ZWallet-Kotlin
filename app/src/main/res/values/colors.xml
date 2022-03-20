@@ -25,7 +25,9 @@
 
     <!-- Personal Info Color -->
     <color name="personalInfoCardColor">#E5E8ED</color>
-
     <color name="iconBackgroundGrey">#EBEEF2</color>
 
+    <!--  ZWallet Resource Color  -->
+    <color name="zBackgroundLightGrey">#F2F3F4</color>
+    <color name="zTextColorLightGrey">#4D4B57</color>
 </resources>

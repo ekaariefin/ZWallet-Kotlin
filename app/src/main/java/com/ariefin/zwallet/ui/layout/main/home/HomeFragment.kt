@@ -1,5 +1,6 @@
 package com.ariefin.zwallet.ui.layout.main.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -15,9 +16,12 @@ import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentHomeBinding
 import com.ariefin.zwallet.ui.adapter.TransactionAdapter
 import com.ariefin.zwallet.ui.widget.LoadingDialog
+import com.ariefin.zwallet.utils.BASE_URL
 import com.ariefin.zwallet.utils.Helper.formatPrice
 import com.ariefin.zwallet.utils.PREFS_NAME
 import com.ariefin.zwallet.utils.State
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
 import javax.net.ssl.HttpsURLConnection
 
@@ -32,10 +36,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         loadingDialog = LoadingDialog(requireActivity())
-
         return binding.root
     }
 
@@ -60,6 +63,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun prepareData() {
         this.transactionAdapter = TransactionAdapter(listOf())
         binding.recyclerTransaction.apply {
@@ -67,10 +71,10 @@ class HomeFragment : Fragment() {
             adapter = transactionAdapter
         }
 
-        viewModel.getBalance().observe(viewLifecycleOwner) {
+        viewModel.getBalance().observe(viewLifecycleOwner) { it ->
             when (it.state) {
                 State.LOADING -> {
-                    loadingDialog.start("Processing your request")
+                    loadingDialog.start("Processing Data...")
                     binding.apply {
                         loadingIndicator.visibility = View.VISIBLE
                         recyclerTransaction.visibility = View.GONE
@@ -78,12 +82,18 @@ class HomeFragment : Fragment() {
                 }
 
                 State.SUCCESS -> {
-
                     if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
                         binding.apply {
                             currentBalance.formatPrice(it.resource.data?.get(0)?.balance.toString())
                             userPhoneNum.text = it.resource.data?.get(0)?.phone
                             userNameInfo.text = it.resource.data?.get(0)?.name
+                            Glide.with(profileImage)
+                                .load(BASE_URL + it.resource.data?.get(0)?.image)
+                                .apply(
+                                    RequestOptions.circleCropTransform()
+                                        .placeholder(R.drawable.ic_baseline_remove_red_eye_24)
+                                )
+                                .into(profileImage)
                         }
                     } else {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
@@ -119,7 +129,7 @@ class HomeFragment : Fragment() {
                         }
                         if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
                             this.transactionAdapter.apply {
-                                addData(it.resource?.data!!)
+                                addData(it.resource.data!!)
                                 notifyDataSetChanged()
                             }
                         } else {
@@ -137,8 +147,6 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-
-
         }
     }
 }

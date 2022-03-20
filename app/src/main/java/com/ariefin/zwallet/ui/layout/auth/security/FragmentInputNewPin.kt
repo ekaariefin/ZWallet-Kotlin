@@ -1,5 +1,6 @@
 package com.ariefin.zwallet.ui.layout.auth.security
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -11,24 +12,24 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
-import com.ariefin.zwallet.databinding.FragmentCreatePinBinding
-import com.ariefin.zwallet.model.APIResponse
-import com.ariefin.zwallet.model.User
+import com.ariefin.zwallet.databinding.FragmentInputNewPinBinding
 import com.ariefin.zwallet.model.request.CreatePinRequest
-import com.ariefin.zwallet.network.NetworkConfig
+import com.ariefin.zwallet.ui.layout.auth.AuthViewModel
 import com.ariefin.zwallet.ui.widget.LoadingDialog
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import javax.net.ssl.HttpsURLConnection
+import com.ariefin.zwallet.utils.PREFS_NAME
+import com.ariefin.zwallet.utils.State
+import dagger.hilt.android.AndroidEntryPoint
 
-class CreatePinFragment : Fragment() {
-    private lateinit var binding: FragmentCreatePinBinding
-    private lateinit var prefs: SharedPreferences
+@AndroidEntryPoint
+class FragmentInputNewPin : Fragment() {
+    private lateinit var binding: FragmentInputNewPinBinding
+    private lateinit var preferences:  SharedPreferences
     var pin  = mutableListOf<EditText>()
     private lateinit var loadingDialog: LoadingDialog
+    private val viewModel: AuthViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,29 +39,50 @@ class CreatePinFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCreatePinBinding.inflate(layoutInflater)
+        binding = FragmentInputNewPinBinding.inflate(layoutInflater)
+        loadingDialog = LoadingDialog(requireActivity())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        preferences = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
         initEditText()
 
-        binding.btnConfirmCreatePin.setOnClickListener() {
+        binding.btnConfirmChangePIN.setOnClickListener() {
             val createpin = CreatePinRequest(
                 getpin().toString()
             )
+            viewModel.createPIN(createpin).observe(viewLifecycleOwner) {
+                when (it.state){
+                    State.LOADING -> {
+                        loadingDialog.start("Proses Mengganti PIN Anda...")
+                    }
+                    State.SUCCESS -> {
+                        Toast.makeText(context, "Ganti PIN Berhasil", Toast.LENGTH_SHORT)
+                            .show()
+                        Navigation.findNavController(view).navigate(R.id.action_fragmentInputNewPin_to_homeFragment2)
+                        loadingDialog.stop()
+                    }
+                    State.ERROR -> {
+                        Toast.makeText(context, "Ganti PIN Gagal! Harap Coba Lagi", Toast.LENGTH_SHORT)
+                            .show()
+                        Navigation.findNavController(view).navigate(R.id.action_fragmentInputNewPin_to_userFragment)
+                        loadingDialog.stop()
+                    }
+                }
 
+            }
         }
     }
 
     fun initEditText(){
-        pin.add(0,binding.inputRegisterPin1)
-        pin.add(1,binding.inputRegisterPin2)
-        pin.add(2,binding.inputRegisterPin3)
-        pin.add(3,binding.inputRegisterPin4)
-        pin.add(4,binding.inputRegisterPin5)
-        pin.add(5,binding.inputRegisterPin6)
+        pin.add(0,binding.inputNewPin1)
+        pin.add(1,binding.inputNewPin2)
+        pin.add(2,binding.inputNewPin3)
+        pin.add(3,binding.inputNewPin4)
+        pin.add(4,binding.inputNewPin5)
+        pin.add(5,binding.inputNewPin6)
         pinHandler()
     }
 
@@ -104,7 +126,7 @@ class CreatePinFragment : Fragment() {
 
     }
 
-    fun getpin():String{
+    private fun getpin():String{
         return pin[0].text.toString()+
                 pin[1].text.toString()+
                 pin[2].text.toString()+

@@ -11,33 +11,27 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetworkConfig(val context: Context?) {
+
+class NetworkConfig (val context: Context?){
     private val preferences = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-    private fun getInterceptor(authenticator: Authenticator? = null): OkHttpClient {
+    private fun getInterceptor(authenticator: Authenticator? = null):OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
-
-        val token = preferences?.getString(KEY_USER_TOKEN, "")
+        val prefs = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val token = prefs?.getString(KEY_USER_TOKEN, "")
         val client = OkHttpClient.Builder()
-            client.addInterceptor(logging)
+            .addInterceptor(logging)
 
-        if(!token.isNullOrEmpty()){
-            client.addInterceptor(TokenInterceptor(token))
+        if (!token.isNullOrEmpty()) {
+            client.addInterceptor(TokenInterceptor{
+                preferences?.getString(KEY_USER_TOKEN,"").toString()
+            })
         }
-        if(authenticator != null) {
+        if (authenticator != null){
             client.authenticator(authenticator)
         }
-
         return client.build()
-    }
-
-    private fun getRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(getInterceptor())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
     }
 
     private fun getService(): ZWalletApi {
@@ -50,7 +44,7 @@ class NetworkConfig(val context: Context?) {
 
     fun buildApi(): ZWalletApi {
         val authenticator = RefreshTokenInterceptor(context, getService(), preferences!!)
-
+        println("authenticator: ${authenticator.context}")
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(getInterceptor(authenticator))
@@ -59,4 +53,4 @@ class NetworkConfig(val context: Context?) {
             .create(ZWalletApi::class.java)
     }
 
- }
+}

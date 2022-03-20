@@ -16,9 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class TransferViewModel @Inject constructor(private var dataSource: ZWalletDataSource): ViewModel() {
     private var selectedContact = MutableLiveData<Contact>()
-    var data_amount  = MutableLiveData<Int>()
-    var data_receiver = MutableLiveData<Int>()
-    var data_notes = MutableLiveData<String>()
 
     private var transfer = MutableLiveData<TransferRequest>()
 
@@ -46,9 +43,10 @@ class TransferViewModel @Inject constructor(private var dataSource: ZWalletDataS
         return  dataSource.Transfer(trf,pin)
     }
 
-    fun balance(): LiveData<Resource<APIResponse<List<UserDetail>>?>> {
+    fun getBalance(): LiveData<Resource<APIResponse<List<UserDetail>>?>> {
         return dataSource.getBalance()
     }
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.ariefin.zwallet.ui.layout
+package com.ariefin.zwallet.ui.layout.main.profile
 
 import android.content.Context
 import android.content.SharedPreferences

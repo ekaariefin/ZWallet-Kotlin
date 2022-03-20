@@ -1,31 +1,32 @@
 package com.ariefin.zwallet.ui.layout.main.transfer
 
-import android.app.AlertDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
-import com.ariefin.zwallet.databinding.FragmentConfirmationBinding
+import com.ariefin.zwallet.databinding.FragmentTransferFailedBinding
 import com.ariefin.zwallet.ui.widget.LoadingDialog
 import com.ariefin.zwallet.utils.BASE_URL
 import com.ariefin.zwallet.utils.Helper.formatPrice
+import com.ariefin.zwallet.utils.PREFS_NAME
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
 
-@AndroidEntryPoint
-class ConfirmationFragment : Fragment() {
-    private lateinit var binding: FragmentConfirmationBinding
+class TransferFailedFragment : Fragment() {
+    private lateinit var binding: FragmentTransferFailedBinding
+    private lateinit var preferences: SharedPreferences
     private val viewModel: TransferViewModel by activityViewModels()
     private lateinit var loadingDialog: LoadingDialog
 
@@ -33,21 +34,14 @@ class ConfirmationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentConfirmationBinding.inflate(layoutInflater)
-        loadingDialog= LoadingDialog(requireActivity())
+        binding = FragmentTransferFailedBinding.inflate(layoutInflater)
+        loadingDialog = LoadingDialog(requireActivity())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getBalance().observe(viewLifecycleOwner) {
-            if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
-                binding.apply {
-                    confirmationBalanceLeftValue.formatPrice(it.resource.data?.get(0)?.balance.toString())
-                }
-            }
-        }
+        preferences = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
 
         viewModel.getSelectedContact().observe(viewLifecycleOwner) {
             binding.apply {
@@ -63,6 +57,13 @@ class ConfirmationFragment : Fragment() {
             }
         }
 
+        viewModel.getBalance().observe(viewLifecycleOwner) {
+            if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
+                binding.apply {
+                    confirmationBalanceLeftValue.formatPrice(it.resource.data?.get(0)?.balance.toString())
+                }
+            }
+        }
 
         viewModel.getTransferParam().observe(viewLifecycleOwner) {
             binding.confirmationAmountValue.formatPrice(it.amount.toString())
@@ -86,18 +87,8 @@ class ConfirmationFragment : Fragment() {
             }
         }
 
-        binding.btnContinueToPin.setOnClickListener {
-            loadingDialog.start("Memproses Transaksi Anda, Harap Menunggu...")
-            AlertDialog.Builder(context)
-                .setTitle("Transfer Confirmation")
-                .setMessage("Are you sure you want to make the transfer process?")
-                .setPositiveButton("Yes") { _, _ ->
-                    Navigation.findNavController(it).navigate(R.id.action_confirmationFragment_to_pinConfirmationFragment)
-                    loadingDialog.stop()
-
-                }.setNegativeButton("No") { _, _ ->
-                    return@setNegativeButton
-                }.show()
+        binding.btnTryAgain.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_transferFailedFragment_to_transferFragment)
         }
     }
 

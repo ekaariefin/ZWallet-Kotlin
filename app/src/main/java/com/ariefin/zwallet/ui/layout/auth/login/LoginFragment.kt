@@ -14,10 +14,10 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentLoginBinding
+import com.ariefin.zwallet.ui.layout.auth.AuthViewModel
 import com.ariefin.zwallet.ui.layout.main.MainActivity
 import com.ariefin.zwallet.ui.widget.LoadingDialog
 import com.ariefin.zwallet.utils.*
@@ -25,9 +25,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.net.ssl.HttpsURLConnection
 
 @AndroidEntryPoint
-class LoginFragement : Fragment() {
+class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private val viewModel: LoginViewModel by activityViewModels()
+    private val viewModel: AuthViewModel by activityViewModels()
     private lateinit var preferences: SharedPreferences
     private lateinit var loadingDialog: LoadingDialog
 
@@ -46,10 +46,10 @@ class LoginFragement : Fragment() {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
         binding.inputPassword.addTextChangedListener {
-            if (binding.inputPassword.text.length > 8) {
+            if (binding.inputPassword.text.length > 5) {
                 binding.btnLogin.setBackgroundResource(R.drawable.background_primary)
                 binding.btnLogin.setTextColor(Color.parseColor("#FFFFFF"))
-            } else if (binding.inputPassword.text.length <= 8) {
+            } else if (binding.inputPassword.text.length <= 5) {
                 binding.btnLogin.setBackgroundResource(R.drawable.background_button_grey)
                 binding.btnLogin.setTextColor(Color.parseColor("#9DA6B5"))
             }
@@ -57,7 +57,7 @@ class LoginFragement : Fragment() {
 
         binding.btnLogin.setOnClickListener {
             if (binding.inputEmail.text.isNullOrEmpty() || binding.inputPassword.text.isNullOrEmpty()) {
-                Toast.makeText(activity, "email or password is empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Email atau Password tidak boleh kosong!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val response = viewModel.login(

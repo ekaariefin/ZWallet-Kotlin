@@ -1,6 +1,5 @@
-package com.ariefin.zwallet.ui.layout
+package com.ariefin.zwallet.ui.layout.auth.register
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.ariefin.zwallet.databinding.FragmentInputNewPinBinding
+import com.ariefin.zwallet.databinding.FragmentInputOtpBinding
 import com.ariefin.zwallet.ui.layout.main.home.HomeViewModel
-import com.ariefin.zwallet.utils.PREFS_NAME
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentInputNewPin : Fragment() {
-    private lateinit var binding: FragmentInputNewPinBinding
+class InputOtpFragment : Fragment() {
+    private lateinit var binding: FragmentInputOtpBinding
     private lateinit var prefs: SharedPreferences
     private val viewModel: HomeViewModel by activityViewModels()
 
@@ -27,13 +25,13 @@ class FragmentInputNewPin : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentInputNewPinBinding.inflate(layoutInflater)
+        binding = FragmentInputOtpBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
+
     }
 
 }

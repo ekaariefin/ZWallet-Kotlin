@@ -65,6 +65,7 @@ class FindReceiverFragment : Fragment() {
                             addData(it.resource.data!!)
                             notifyDataSetChanged()
                         }
+                        binding.contactTotal.text = contactAdapter.itemCount.toString()
                     } else {
                         Toast.makeText(context, it.resource?.message, Toast.LENGTH_SHORT)
                             .show()

@@ -35,4 +35,16 @@
     <string name="find_receiver">Find Receiver</string>
     <string name="confirmation">Confirmation</string>
     <string name="details">Details</string>
+    <string name="success_check_icon">success check icon</string>
+    <string name="transfer_to">Transfer to</string>
+    <string name="transfer_failed">Transfer Failed</string>
+    <string name="transfer_failed_desc">We can’t transfer your money at the moment, we recommend you to check your internet connection and try again.</string>
+    <string name="success_icon">Success Icon</string>
+    <string name="transfer_success">Transfer Success</string>
+    <string name="notification_icon">Notification Icon</string>
+    <string name="balance">Balance</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="see_all">See all</string>
+    <string name="login">Login</string>
+    <string name="_0_00">0.00</string>
 </resources>

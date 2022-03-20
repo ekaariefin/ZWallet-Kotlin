@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.layout.auth.login.LoginFragement">
+    tools:context=".ui.layout.auth.login.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor"
+        android:background="@color/zBackgroundLightGrey"
         tools:context=".ui.layout.auth.LoginFragment">
 
         <TextView
@@ -42,6 +42,8 @@
                 android:id="@+id/success_icon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/white"
                 android:src="@drawable/success_check_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

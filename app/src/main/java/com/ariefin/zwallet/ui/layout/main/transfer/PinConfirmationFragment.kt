@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentConfirmationBinding
 import com.ariefin.zwallet.databinding.FragmentPinConfirmationBinding
@@ -76,39 +77,43 @@ class PinConfirmationFragment : Fragment() {
         pinHandler()
     }
 
-    private fun pinHandler(){
-        for (i in 0..5) {
-            pin[i].addTextChangedListener(object : TextWatcher {
+    fun pinHandler(){
+        for (i in 0..5) { //Its designed for 6 digit pin
+            pin.get(i).addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    pin.get(i).setBackgroundResource(R.drawable.pin_input_filled_background)
 
                 }
                 override fun afterTextChanged(s: Editable) {
-                    if (i == 5 && pin[i].text.toString().isNotEmpty()) {
-                        pin[i].clearFocus()
-                    } else if (pin[i].text.toString().isNotEmpty()) {
-                        pin[i + 1].requestFocus()
+                    if (i == 5 && !pin.get(i).getText().toString().isEmpty()) {
+                        pin.get(i).clearFocus()
+
+                        //Clears focus when you have entered the last digit of the pin.
+                    } else if (!pin.get(i).getText().toString().isEmpty()) {
+                        pin.get(i + 1).requestFocus() //focuses on the next edittext after a digit is entered.
                     }
                 }
-
             })
-
-            pin[i].setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            pin.get(i).setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
                 if (event.action !== KeyEvent.ACTION_DOWN) {
                     return@OnKeyListener false //Dont get confused by this, it is because onKeyListener is called twice and this condition is to avoid it.
                 }
-                if (keyCode == KeyEvent.KEYCODE_DEL && pin[i].text.toString().isEmpty() && i != 0) {
+                if (keyCode == KeyEvent.KEYCODE_DEL && pin.get(i).getText().toString().isEmpty() && i != 0) {
                     //this condition is to handel the delete input by users.
-                    pin[i - 1].setText("") //Deletes the digit of pin
-                    pin[i - 1].requestFocus()
+                    pin.get(i - 1).setText("") //Deletes the digit of pin
+                    pin.get(i - 1).requestFocus()
+                    pin.get(i - 1).setBackgroundResource(R.drawable.pin_input_background)
+
                     //and sets the focus on previous digit
                 }
                 false
             })
 
         }
+
 
     }
 
@@ -146,16 +151,21 @@ class PinConfirmationFragment : Fragment() {
         viewModel.transfer(request!!,getpin()).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             when (it.state){
                 State.LOADING -> {
-                    loadingDialog.start("Processing your request")
+                    loadingDialog.start("Memproses Transaksi Anda...")
                 }
                 State.SUCCESS -> {
-                    Toast.makeText(context, "Memuat Data...", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Memproses Transaksi Anda, Harap Menunggu...", Toast.LENGTH_SHORT)
                         .show()
+                    Toast.makeText(context, "Proses Transfer Berhasil!", Toast.LENGTH_SHORT)
+                        .show()
+                    Navigation.findNavController(view).navigate(R.id.action_pinConfirmationFragment_to_transferSuccessFragment)
+                    loadingDialog.stop()
                 }
                 State.ERROR -> {
-                    Toast.makeText(context, "Gagal Memuat Data...", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Transaksi Gagal, Harap Coba Lagi", Toast.LENGTH_SHORT)
                         .show()
-
+                    Navigation.findNavController(view).navigate(R.id.action_pinConfirmationFragment_to_transferFailedFragment)
+                    loadingDialog.stop()
                 }
             }
         })

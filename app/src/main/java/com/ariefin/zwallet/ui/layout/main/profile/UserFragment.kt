@@ -17,9 +17,12 @@ import com.ariefin.zwallet.databinding.FragmentUserBinding
 import com.ariefin.zwallet.ui.layout.SplashScreenActivity
 import com.ariefin.zwallet.ui.layout.main.home.HomeViewModel
 import com.ariefin.zwallet.ui.widget.LoadingDialog
+import com.ariefin.zwallet.utils.BASE_URL
 import com.ariefin.zwallet.utils.KEY_LOGGED_IN
 import com.ariefin.zwallet.utils.PREFS_NAME
 import com.ariefin.zwallet.utils.State
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
 import javax.net.ssl.HttpsURLConnection
 
@@ -83,20 +86,23 @@ class UserFragment : Fragment() {
     }
 
     private fun prepareData() {
-
-
         viewModel.getBalance().observe(viewLifecycleOwner) {
             when (it.state) {
                 State.LOADING -> {
                     loadingDialog.start("Processing your request")
                 }
-
                 State.SUCCESS -> {
-
                     if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
                         binding.apply {
                             profileName.text = it.resource.data?.get(0)?.name
                             profilePhoneNum.text = it.resource.data?.get(0)?.phone
+                            Glide.with(profileImage)
+                                .load(BASE_URL + it.resource.data?.get(0)?.image)
+                                .apply(
+                                    RequestOptions.circleCropTransform()
+                                        .placeholder(R.drawable.ic_baseline_remove_red_eye_24)
+                                )
+                                .into(profileImage)
                         }
                     } else {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
@@ -104,18 +110,11 @@ class UserFragment : Fragment() {
                     }
                     loadingDialog.dismiss()
                 }
-
                 State.ERROR -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
                         .show()
                 }
-
-
             }
-
-
         }
-
-
     }
 }

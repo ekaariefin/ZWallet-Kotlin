@@ -39,7 +39,7 @@ class CreatePinSuccessFragment : Fragment() {
         prefs = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
 
         binding.btnConfirmToLogin.setOnClickListener() {
-            Toast.makeText(context, "Mengalihkan...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Mengalihkan ke halaman login...", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(view).navigate(R.id.action_createPinSuccessFragment_to_loginFragement)
         }
 
