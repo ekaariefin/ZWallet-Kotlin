@@ -49,6 +49,11 @@ class UserFragment : Fragment() {
 
         prepareData()
 
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
+
         binding.textButtonPersonalInfo.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_userFragment_to_personalInfoFragment)

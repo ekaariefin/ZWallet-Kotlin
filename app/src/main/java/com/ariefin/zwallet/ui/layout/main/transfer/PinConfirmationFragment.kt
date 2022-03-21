@@ -2,36 +2,25 @@ package com.ariefin.zwallet.ui.layout.main.transfer
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
-import com.ariefin.zwallet.databinding.FragmentConfirmationBinding
 import com.ariefin.zwallet.databinding.FragmentPinConfirmationBinding
 import com.ariefin.zwallet.model.request.TransferRequest
 import com.ariefin.zwallet.ui.widget.LoadingDialog
-import com.ariefin.zwallet.utils.BASE_URL
-import com.ariefin.zwallet.utils.Helper.formatPrice
 import com.ariefin.zwallet.utils.PREFS_NAME
 import com.ariefin.zwallet.utils.State
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
-import javax.net.ssl.HttpsURLConnection
 
 @AndroidEntryPoint
 class PinConfirmationFragment : Fragment() {
@@ -59,6 +48,11 @@ class PinConfirmationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initEditText()
         preferences = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
+
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
 
         binding.btnContinueTransferProcess.setOnClickListener {
 
@@ -105,16 +99,13 @@ class PinConfirmationFragment : Fragment() {
                     //this condition is to handel the delete input by users.
                     pin.get(i - 1).setText("") //Deletes the digit of pin
                     pin.get(i - 1).requestFocus()
-                    pin.get(i - 1).setBackgroundResource(R.drawable.pin_input_background)
+                    pin.get(i).setBackgroundResource(R.drawable.pin_input_background)
 
                     //and sets the focus on previous digit
                 }
                 false
             })
-
         }
-
-
     }
 
     fun getpin():String{

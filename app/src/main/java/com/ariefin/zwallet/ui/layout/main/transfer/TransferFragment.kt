@@ -38,6 +38,12 @@ class TransferFragment : Fragment() {
 
         var id: String?=null
 
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
+
+
         viewModel.getSelectedContact().observe(viewLifecycleOwner) {
             id = it?.id.toString()
             binding.apply {

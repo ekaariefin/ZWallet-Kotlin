@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.ariefin.zwallet.data.ZWalletDataSource
 import com.ariefin.zwallet.data.api.ZWalletApi
 import com.ariefin.zwallet.model.APIResponse
+import com.ariefin.zwallet.model.User
 import com.ariefin.zwallet.model.UserDetail
+import com.ariefin.zwallet.model.request.ChangeInfoRequest
 import com.ariefin.zwallet.network.NetworkConfig
 import com.ariefin.zwallet.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,5 +21,7 @@ class PersonalInfoViewModel @Inject constructor(private var dataSource: ZWalletD
         return dataSource.getProfileInfo()
     }
 
-
+    fun changeInfo(info: ChangeInfoRequest): LiveData<Resource<APIResponse<User>?>> {
+        return dataSource.changeInfo(info)
+    }
 }

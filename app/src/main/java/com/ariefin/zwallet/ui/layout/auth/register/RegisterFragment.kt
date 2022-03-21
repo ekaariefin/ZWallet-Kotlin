@@ -3,6 +3,7 @@ package com.ariefin.zwallet.ui.layout.auth.register
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
@@ -43,6 +45,16 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
+        binding.inputPasswordRegister.addTextChangedListener {
+            if (binding.inputPasswordRegister.text.length > 5) {
+                binding.btnRegister.setBackgroundResource(R.drawable.background_primary)
+                binding.btnRegister.setTextColor(Color.parseColor("#FFFFFF"))
+            } else if (binding.inputPasswordRegister.text.length <= 5) {
+                binding.btnRegister.setBackgroundResource(R.drawable.background_button_grey)
+                binding.btnRegister.setTextColor(Color.parseColor("#9DA6B5"))
+            }
+        }
+
 
         binding.btnRegister.setOnClickListener {
             if (binding.inputUsernameRegister.text.isNullOrEmpty() || binding.inputEmailRegister.text.isNullOrEmpty() || binding.inputPasswordRegister.text.isNullOrEmpty()){
@@ -65,33 +77,23 @@ class RegisterFragment : Fragment() {
                         loadingDialog.dismiss()
                         if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
                             with(preferences.edit()) {
-                                putBoolean(KEY_LOGGED_IN, true)
-                                putString(KEY_USER_EMAIL, it.resource.data?.email)
-                                putString(KEY_USER_TOKEN, it.resource.data?.token)
-                                putString(KEY_USER_REFRESH_TOKEN, it.resource.data?.refreshToken)
+                                putString(KEY_USER_EMAIL, binding.inputEmailRegister.text.toString())
                                 apply()
                             }
-
-                            if(it.resource.data?.hasPin!!) {
-                                Handler().postDelayed({
-                                    val intent = Intent(activity, MainActivity::class.java)
-                                    startActivity(intent)
-                                    activity?.finish()
-                                }, 1500)
-                            }
-                            else {
-                                Navigation.findNavController(view)
-                                    .navigate(R.id.action_loginFragement_to_createPinFragment)
-                            }
+                            Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_inputOtpFragment)
+                            loadingDialog.stop()
                         } else {
+                            loadingDialog.stop()
                             Toast.makeText(context, it.resource?.message, Toast.LENGTH_SHORT)
                                 .show()
+                            Navigation.findNavController(view).navigate(R.id.action_registerFragment_self)
                         }
 
                     }
                     State.ERROR -> {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
                             .show()
+                        Navigation.findNavController(view).navigate(R.id.action_registerFragment_self)
                     }
                 }
 

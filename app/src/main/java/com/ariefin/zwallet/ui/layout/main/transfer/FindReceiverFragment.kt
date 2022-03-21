@@ -43,6 +43,12 @@ class FindReceiverFragment : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_findReceiverFragment_to_transferFragment)
         }
+
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
+
         binding.recyclerTransactionContact.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = contactAdapter

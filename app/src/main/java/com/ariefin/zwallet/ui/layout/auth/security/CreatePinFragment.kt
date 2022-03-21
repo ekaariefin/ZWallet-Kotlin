@@ -1,7 +1,9 @@
 package com.ariefin.zwallet.ui.layout.auth.security
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentCreatePinBinding
@@ -18,7 +21,11 @@ import com.ariefin.zwallet.model.APIResponse
 import com.ariefin.zwallet.model.User
 import com.ariefin.zwallet.model.request.CreatePinRequest
 import com.ariefin.zwallet.network.NetworkConfig
+import com.ariefin.zwallet.ui.layout.auth.AuthActivity
+import com.ariefin.zwallet.ui.layout.auth.AuthViewModel
+import com.ariefin.zwallet.ui.layout.main.MainActivity
 import com.ariefin.zwallet.ui.widget.LoadingDialog
+import com.ariefin.zwallet.utils.State
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +36,7 @@ class CreatePinFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     var pin  = mutableListOf<EditText>()
     private lateinit var loadingDialog: LoadingDialog
+    private val viewModel: AuthViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +47,7 @@ class CreatePinFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCreatePinBinding.inflate(layoutInflater)
+        loadingDialog = LoadingDialog(requireActivity())
         return binding.root
     }
 
@@ -50,7 +59,34 @@ class CreatePinFragment : Fragment() {
             val createpin = CreatePinRequest(
                 getpin().toString()
             )
+            viewModel.createPIN(createpin).observe(viewLifecycleOwner) {
+                when (it.state){
+                    State.LOADING -> {
+                        loadingDialog.start("Memproses Permintaan Anda...")
+                    }
+                    State.SUCCESS -> {
+                        Toast.makeText(context, "Proses Aktivasi Berhasil, Silahkan Login", Toast.LENGTH_SHORT)
+                            .show()
+                        Handler().postDelayed({
+                            val intent = Intent(activity, MainActivity::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                        }, 1000)
+                        loadingDialog.dismiss()
+                    }
+                    State.ERROR -> {
+                        Toast.makeText(context, "Terjadi Kesalahan saat memproses data, Harap Ulangi Proses", Toast.LENGTH_SHORT)
+                            .show()
+                        Handler().postDelayed({
+                            val intent = Intent(activity, AuthActivity::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                        }, 1000)
+                        loadingDialog.dismiss()
+                    }
+                }
 
+            }
         }
     }
 
@@ -92,7 +128,7 @@ class CreatePinFragment : Fragment() {
                     //this condition is to handel the delete input by users.
                     pin.get(i - 1).setText("") //Deletes the digit of pin
                     pin.get(i - 1).requestFocus()
-                    pin.get(i - 1).setBackgroundResource(R.drawable.pin_input_background)
+                    pin.get(i).setBackgroundResource(R.drawable.pin_input_background)
 
                     //and sets the focus on previous digit
                 }

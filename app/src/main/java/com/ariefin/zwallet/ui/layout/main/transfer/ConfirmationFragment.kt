@@ -41,6 +41,11 @@ class ConfirmationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
+
         viewModel.getBalance().observe(viewLifecycleOwner) {
             if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
                 binding.apply {
@@ -98,6 +103,7 @@ class ConfirmationFragment : Fragment() {
                 }.setNegativeButton("No") { _, _ ->
                     return@setNegativeButton
                 }.show()
+            loadingDialog.dismiss()
         }
     }
 

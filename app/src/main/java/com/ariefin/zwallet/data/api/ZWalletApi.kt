@@ -39,4 +39,10 @@ interface ZWalletApi {
     @GET("auth/checkPIN/{PIN}")
     suspend fun checkPIN(@Path("PIN") pin: String): APIResponse<String>
 
+    @GET("auth/activate/{email}/{otp}")
+    suspend fun activation(@Path("email") email: String, @Path("otp") otp: String): APIResponse<String>
+
+    @PATCH("user/changeInfo")
+    suspend fun changeInfo(@Body request: ChangeInfoRequest): APIResponse<User>
+
 }

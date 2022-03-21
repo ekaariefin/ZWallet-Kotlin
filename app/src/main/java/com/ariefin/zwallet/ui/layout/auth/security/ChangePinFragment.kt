@@ -48,6 +48,11 @@ class ChangePinFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initEditText()
 
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
+
         binding.buttonContinueToNewPin.setOnClickListener {
             val response = viewModel.checkPIN(
                 getpin()
@@ -115,7 +120,7 @@ class ChangePinFragment : Fragment() {
                     //this condition is to handel the delete input by users.
                     pin.get(i - 1).setText("") //Deletes the digit of pin
                     pin.get(i - 1).requestFocus()
-                    pin.get(i - 1).setBackgroundResource(R.drawable.pin_input_background)
+                    pin.get(i).setBackgroundResource(R.drawable.pin_input_background)
 
                     //and sets the focus on previous digit
                 }

@@ -39,16 +39,26 @@ class PersonalInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         prefs = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
+        prepareData()
+
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
 
         binding.btnManagePhoneNum.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_personalInfoFragment_to_managePhoneNumFragment)
         }
-        prepareData()
+
+        binding.btnAddPhoneNum.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_personalInfoFragment_to_addPhoneNumberFragment)
+        }
+
     }
 
     private fun prepareData() {
-
         viewModel.getProfileInfo().observe(viewLifecycleOwner) {
             when (it.state) {
                 State.LOADING -> {
@@ -56,13 +66,22 @@ class PersonalInfoFragment : Fragment() {
                 }
 
                 State.SUCCESS -> {
-
                     if (it.resource?.status == HttpsURLConnection.HTTP_OK) {
                         binding.apply {
                             firstNameValue.text = it.resource.data?.firstname
                             lastNameValue.text = it.resource.data?.lastname
                             verifiedEmailValue.text = it.resource.data?.email
                             phoneNumberValue.text = it.resource.data?.phone
+
+                            if(binding.phoneNumberValue.text.isNullOrEmpty()) {
+                                binding.layoutPhoneNumWithData.visibility = View.GONE
+                                binding.layoutPhoneNumNoData.visibility = View.VISIBLE
+                            }
+                            else {
+                                binding.layoutPhoneNumWithData.visibility = View.VISIBLE
+                                binding.layoutPhoneNumNoData.visibility = View.GONE
+                            }
+
                         }
                     } else {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
@@ -76,10 +95,7 @@ class PersonalInfoFragment : Fragment() {
                     Toast.makeText(context, "Terjadi Kesalahan Saat Mengambil Data", Toast.LENGTH_SHORT)
                         .show()
                 }
-
-
             }
         }
-
     }
 }

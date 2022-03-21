@@ -1,17 +1,19 @@
 package com.ariefin.zwallet.ui.layout.main.transfer
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentTransferSuccessBinding
+import com.ariefin.zwallet.ui.layout.main.MainActivity
 import com.ariefin.zwallet.ui.widget.LoadingDialog
 import com.ariefin.zwallet.utils.BASE_URL
 import com.ariefin.zwallet.utils.Helper.formatPrice
@@ -90,7 +92,11 @@ class TransferSuccessFragment : Fragment() {
         }
 
         binding.btnContinueToHome.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_transferSuccessFragment_to_homeFragment2)
+            Handler().postDelayed({
+                val intent = Intent(activity, MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }, 500)
         }
     }
 

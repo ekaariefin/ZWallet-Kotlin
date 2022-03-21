@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_registerFragment_to_inputOtpFragment"
             app:destination="@id/inputOtpFragment" />
+        <action
+            android:id="@+id/action_registerFragment_self"
+            app:destination="@id/registerFragment" />
     </fragment>
 
     <fragment
@@ -56,6 +59,12 @@
         android:name="com.ariefin.zwallet.ui.layout.auth.register.InputOtpFragment"
         android:label="InputOtpFragment"
         tools:layout="@layout/fragment_input_otp">
+        <action
+            android:id="@+id/action_inputOtpFragment_to_createPinFragment"
+            app:destination="@id/createPinFragment" />
+        <action
+            android:id="@+id/action_inputOtpFragment_self"
+            app:destination="@id/inputOtpFragment" />
     </fragment>
     <fragment
         android:id="@+id/createPinFragment"

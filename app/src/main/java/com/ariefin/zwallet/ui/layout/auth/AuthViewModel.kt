@@ -30,4 +30,8 @@ class AuthViewModel @Inject constructor(private var dataSource: ZWalletDataSourc
         return  dataSource.createPIN(pin)
     }
 
+    fun activation(email: String, otp: String):  LiveData<Resource<APIResponse<String>?>> {
+        return dataSource.activation(email,otp)
+    }
+
 }

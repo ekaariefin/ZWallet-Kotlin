@@ -1,9 +1,11 @@
 package com.ariefin.zwallet.ui.layout.main.transfer
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.ariefin.zwallet.R
 import com.ariefin.zwallet.databinding.FragmentTransferFailedBinding
+import com.ariefin.zwallet.ui.layout.main.MainActivity
 import com.ariefin.zwallet.ui.widget.LoadingDialog
 import com.ariefin.zwallet.utils.BASE_URL
 import com.ariefin.zwallet.utils.Helper.formatPrice
@@ -88,7 +91,11 @@ class TransferFailedFragment : Fragment() {
         }
 
         binding.btnTryAgain.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_transferFailedFragment_to_transferFragment)
+            Handler().postDelayed({
+                val intent = Intent(activity, MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }, 500)
         }
     }
 

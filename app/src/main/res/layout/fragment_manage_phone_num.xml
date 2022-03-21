@@ -15,6 +15,7 @@
         android:layout_marginStart="20dp"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/btnBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -96,6 +97,7 @@
                     android:id="@+id/btnDeletePhoneNum"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/ic_baseline_delete_24"/>
             </LinearLayout>
         </LinearLayout>

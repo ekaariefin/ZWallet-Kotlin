@@ -49,6 +49,11 @@ class FragmentInputNewPin : Fragment() {
         preferences = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
         initEditText()
 
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
+
         binding.btnConfirmChangePIN.setOnClickListener() {
             val createpin = CreatePinRequest(
                 getpin().toString()

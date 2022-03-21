@@ -1,6 +1,7 @@
 package com.ariefin.zwallet.ui.layout.auth.security
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,6 +17,8 @@ import com.ariefin.zwallet.model.APIResponse
 import com.ariefin.zwallet.model.User
 import com.ariefin.zwallet.model.request.ChangePasswordRequest
 import com.ariefin.zwallet.network.NetworkConfig
+import com.ariefin.zwallet.ui.layout.SplashScreenActivity
+import com.ariefin.zwallet.utils.KEY_LOGGED_IN
 import com.ariefin.zwallet.utils.PREFS_NAME
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,6 +43,11 @@ class ChangePasswordFragment : Fragment() {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
         prefs = activity?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
+
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(view)
+                .popBackStack()
+        }
 
         binding.btnContinueChangePassword.setOnClickListener {
             if (binding.inputCurrentPassword.text.isNullOrEmpty() || binding.inputNewPassword.text.isNullOrEmpty() || binding.inputConfirmPassword.text.isNullOrEmpty()){

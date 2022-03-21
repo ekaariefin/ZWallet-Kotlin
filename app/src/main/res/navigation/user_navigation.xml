@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_personalInfoFragment_to_managePhoneNumFragment"
             app:destination="@id/managePhoneNumFragment" />
+        <action
+            android:id="@+id/action_personalInfoFragment_to_addPhoneNumberFragment"
+            app:destination="@id/addPhoneNumberFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePinFragment"
@@ -68,7 +71,11 @@
         android:id="@+id/managePhoneNumFragment"
         android:name="com.ariefin.zwallet.ui.layout.main.profile.ManagePhoneNumFragment"
         android:label="ManagePhoneNumFragment"
-        tools:layout="@layout/fragment_manage_phone_num" />
+        tools:layout="@layout/fragment_manage_phone_num" >
+        <action
+            android:id="@+id/action_managePhoneNumFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentInputNewPin"
         android:name="com.ariefin.zwallet.ui.layout.auth.security.FragmentInputNewPin"
@@ -144,6 +151,15 @@
         <action
             android:id="@+id/action_transferFailedFragment_to_transferFragment"
             app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPhoneNumberFragment"
+        android:name="com.ariefin.zwallet.AddPhoneNumberFragment"
+        android:label="AddPhoneNumberFragment"
+        tools:layout="@layout/fragment_add_phone_number" >
+        <action
+            android:id="@+id/action_addPhoneNumberFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
     </fragment>
 
 </navigation>
