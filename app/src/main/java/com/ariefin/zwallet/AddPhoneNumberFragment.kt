@@ -47,8 +47,7 @@ class AddPhoneNumberFragment : Fragment() {
         prefs = context?.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
 
         binding.btnBack.setOnClickListener {
-            Navigation.findNavController(view)
-                .popBackStack()
+            Navigation.findNavController(view).popBackStack()
         }
 
         binding.btnSubmit.setOnClickListener {

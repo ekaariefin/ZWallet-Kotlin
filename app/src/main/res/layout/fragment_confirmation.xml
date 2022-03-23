@@ -14,37 +14,53 @@
         android:id="@+id/layoutHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseCompoundDrawables">
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        android:background="@drawable/header_primary"
+        tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            android:contentDescription="@string/back_button" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/navigation_back"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
-            android:text="@string/confirmation"
-            android:layout_marginStart="15dp"
-            android:layout_gravity="center"
-            android:textColor="#3f3d3b"
-            android:fontFamily="@font/nunito_font_medium"
-            android:textSize="18sp" />
+            android:paddingTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="20dp"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirmation"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_font_medium"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:paddingBottom="80dp"
+        android:paddingBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutHeader">
 
 
