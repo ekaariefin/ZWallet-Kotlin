@@ -67,38 +67,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textLogin" />
 
-            <EditText
-                android:id="@+id/inputEmail"
-                style="@style/EditText.Input"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/emailLogin"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="45dp"
-                android:autofillHints="emailAddress"
-                android:background="@drawable/background_input"
-                android:drawableStart="@drawable/ic_baseline_mail_24"
-                android:hint="@string/hint_email"
-                android:inputType="textEmailAddress"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textLoginDesc" />
+                app:layout_constraintTop_toBottomOf="@id/textLoginDesc">
+                <EditText
+                    android:id="@+id/inputEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/EditText.Input"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email"
+                    android:background="@drawable/background_input"
+                    android:drawableStart="@drawable/ic_baseline_person_24"
+                    android:autofillHints="emailAddress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/inputPassword"
-                style="@style/EditText.Input"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:id="@+id/layoutPassword"
+                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="45dp"
-                android:autofillHints="emailAddress"
-                android:background="@drawable/background_input"
-                android:drawableStart="@drawable/ic_round_lock_24"
-                android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputEmail" />
+                app:layout_constraintTop_toBottomOf="@id/emailLogin">
+                <EditText
+                    android:id="@+id/inputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/EditText.Input"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_password"
+                    android:background="@drawable/background_input"
+                    android:drawableStart="@drawable/ic_baseline_lock_24"
+                    android:autofillHints="emailAddress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textForgotPassword"
@@ -114,7 +126,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputPassword" />
+                app:layout_constraintTop_toBottomOf="@id/layoutPassword" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"

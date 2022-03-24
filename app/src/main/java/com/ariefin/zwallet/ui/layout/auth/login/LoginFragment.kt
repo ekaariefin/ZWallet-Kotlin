@@ -93,14 +93,20 @@ class LoginFragment : Fragment() {
                                     .navigate(R.id.action_loginFragement_to_createPinFragment)
                             }
                         } else {
-                            Toast.makeText(context, it.resource?.message, Toast.LENGTH_SHORT)
+                            loadingDialog.dismiss()
+                            Toast.makeText(context, "Login Gagal! Harap periksa kembali informasi login anda!", Toast.LENGTH_SHORT)
                                 .show()
+                            Navigation.findNavController(view)
+                                .popBackStack()
                         }
 
                     }
                     State.ERROR -> {
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT)
+                        loadingDialog.dismiss()
+                        Toast.makeText(context, "Login Gagal! Harap periksa kembali informasi login anda!", Toast.LENGTH_SHORT)
                             .show()
+                        Navigation.findNavController(view)
+                            .popBackStack()
                     }
                 }
 

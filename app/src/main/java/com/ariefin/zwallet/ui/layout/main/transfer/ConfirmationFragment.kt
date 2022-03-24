@@ -80,14 +80,20 @@ class ConfirmationFragment : Fragment() {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val current = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy - HH:mma")
-                val answer =  current.format(formatter)
-                binding.dateAndTimeValue.text = answer
+                val formatterForDate = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+                val formatterForTime = DateTimeFormatter.ofPattern("HH:mma")
+                val answerForDate =  current.format(formatterForDate)
+                val answerForTime =  current.format(formatterForTime)
+                binding.dateValue.text = answerForDate
+                binding.timeValue.text = answerForTime
             } else {
                 val date = Date()
-                val formatter = SimpleDateFormat("MMM dd, yyyy - HH:mma")
-                val answer = formatter.format(date)
-                binding.dateAndTimeValue.text = answer
+                val formatterForDate = SimpleDateFormat("MMM dd, yyyy")
+                val answerForDate = formatterForDate.format(date)
+                val formatterForTime = SimpleDateFormat("HH:mma")
+                val answerForTime = formatterForTime.format(date)
+                binding.dateValue.text = answerForDate
+                binding.timeValue.text = answerForTime
             }
         }
 

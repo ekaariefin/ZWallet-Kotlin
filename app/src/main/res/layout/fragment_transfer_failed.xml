@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Transfer Failed"
+                android:text="Transfer Details"
                 android:textAlignment="center"
                 android:layout_gravity="center"
                 android:textStyle="bold"

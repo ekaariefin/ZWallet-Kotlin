@@ -25,11 +25,10 @@
         <LinearLayout
             android:id="@+id/navigation_back"
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:paddingLeft="10dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="10dp"
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
@@ -43,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Confirmation"
+                android:text="Transfer"
                 android:layout_marginLeft="15dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
@@ -55,9 +54,9 @@
             android:id="@+id/transferUserInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:paddingTop="20dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="10dp"
             android:paddingHorizontal="15dp"
             android:orientation="horizontal"
             android:background="@drawable/background_card_white"
@@ -103,83 +102,93 @@
 
     </LinearLayout>
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="20dp"
+        android:layout_height="0dp"
+        android:paddingBottom="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeader"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader">
 
         <LinearLayout
-            android:id="@+id/input_pin_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="parent"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-
-            <EditText
-                android:id="@+id/inputTransferAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:inputType="number"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textSize="48sp"
-                android:singleLine="true"
-                android:textColor="@color/primaryColor"
-                android:nextFocusForward="@+id/inputPin2"
-                android:background="@null"
-                android:hint="@string/_0_00"
-                android:autofillHints="0.00" />
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/userCurrentBalance"
+                android:id="@+id/input_pin_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/userCurrentBalanceValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/nunito"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text=""/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text=" Avaiable"/>
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="100dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="parent">
 
-            <EditText
-                android:id="@+id/inputTransferDesc"
-                style="@style/EditText.Input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="45dp"
-                android:autofillHints="emailAddress"
-                android:drawableStart="@drawable/ic_baseline_edit_24"
-                android:hint="Add some notes"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputEmail" />
+                <EditText
+                    android:id="@+id/inputTransferAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:autofillHints="0.00"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/_0_00"
+                    android:inputType="number"
+                    android:nextFocusForward="@+id/inputPin2"
+                    android:singleLine="true"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="48sp" />
+
+                <LinearLayout
+                    android:id="@+id/userCurrentBalance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/userCurrentBalanceValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/nunito"
+                        android:text=""
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito"
+                        android:text=" Avaiable"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/inputTransferDesc"
+                    style="@style/EditText.Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="45dp"
+                    android:autofillHints="emailAddress"
+                    android:drawableStart="@drawable/ic_baseline_edit_24"
+                    android:hint="Add some notes"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/inputEmail" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnContinueToPin"

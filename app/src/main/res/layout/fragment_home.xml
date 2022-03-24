@@ -103,9 +103,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutBalanceInfo"
         app:layout_constraintEnd_toEndOf="parent">
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonTransfer"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:paddingHorizontal="30dp"
@@ -121,12 +122,12 @@
             android:background="@drawable/home_button_shape"
             android:drawableStart="@drawable/ic_round_arrow_upward_24"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/buttonTopUp"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:paddingHorizontal="30dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Top Up"
             android:textAllCaps="false"
             android:textColor="#514F5B"
