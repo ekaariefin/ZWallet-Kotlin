@@ -106,10 +106,10 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonTransfer"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:paddingHorizontal="30dp"
+            android:paddingHorizontal="40dp"
             android:text="Transfer"
             android:textAllCaps="false"
             android:textColor="#514F5B"
@@ -126,8 +126,8 @@
             android:id="@+id/buttonTopUp"
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:paddingHorizontal="30dp"
-            android:layout_height="60dp"
+            android:paddingHorizontal="40dp"
+            android:layout_height="50dp"
             android:text="Top Up"
             android:textAllCaps="false"
             android:textColor="#514F5B"
